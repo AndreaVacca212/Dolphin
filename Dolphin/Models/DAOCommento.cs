@@ -1,8 +1,9 @@
-﻿
+﻿using System;
+using Utility;
 
 namespace Dolphin.Models
 {
-    public class DAOCommento : IDAO
+    public class DAOCommento
     {
         private Database db;
         public static DAOCommento instance = null;
@@ -13,11 +14,8 @@ namespace Dolphin.Models
         }
         public static DAOCommento GetInstance()
         {
-            if (instance == null)
-                return instance = new DAOCommento();
+            return instance == null ? new DAOCommento() : instance;
 
-            else
-                return instance;
 
         }
 
@@ -40,29 +38,32 @@ namespace Dolphin.Models
 
         public bool Delete(int id)
         {
-            return db.Update($"DELETE FROM Commenti WHERE id = {id}");
+            return db.Send($"DELETE FROM Commenti WHERE id = {id}");
         }
 
         public bool Insert(Entity e)
         {
-            return db.Update($"INSERT INTO Commenti " +
+            Commento commento = (Commento)e;
+
+            return db.Send($"INSERT INTO Commenti " +
                              $"(idPost, idUtente, contenutoCommento, data_ora, miPiace  ) " +
                              $"VALUES " +
-                             $"({((Commento)e).IdPost}, {((Commento)e).IdUtente}, " +
-                             $"'{((Commento)e).ContenutoCommento}', '{((Commento)e).Data_ora}', " +
-                             $"{((Commento)e).MiPiace})");   
+                             $"({commento.IdPost}, {commento.IdUtente}, " +
+                             $"'{commento.ContenutoCommento}', '{commento.Data_Ora}', " +
+                             $"{commento.MiPiace})");   
         }
 
         public bool Send(Entity e)
         {
-            return db.Update(
+            Commento commento = (Commento)e;
+            return db.Send(
                              $"UPDATE Commenti SET " +
-                             $"contenutoPost = {((Commento)e).IdPost}," +
-                             $"data_ora = {((Commento)e).IdUtente}," +
-                             $"miPiace = {((Commento)e).ContenutoCommento}, " +
-                             $"idUtente = '{((Commento)e).Data_ora}' " +
-                             $"idUtente = {((Commento)e).MiPiace} " +
-                             $"WHERE id = {e.Id}"
+                             $"contenutoPost = {commento.IdPost}," +
+                             $"data_ora = {commento.IdUtente}," +
+                             $"miPiace = {commento.ContenutoCommento}, " +
+                             $"idUtente = '{commento.Data_Ora}' " +
+                             $"idUtente = {commento.MiPiace} " +
+                             $"WHERE id = {commento.Id}"
                             );
         }
 

@@ -1,8 +1,9 @@
-﻿
+﻿using Utility;
+using System;
 
 namespace Dolphin.Models
 {
-    public class DAOPost : IDAO
+    public class DAOPost
     {
         private Database db;
         public static DAOPost instance = null;
@@ -40,28 +41,30 @@ namespace Dolphin.Models
 
         public bool Delete(int id)
         {
-            return db.Update($"DELETE FROM Posts WHERE id = {id}");
+            return db.Send($"DELETE FROM Posts WHERE id = {id}");
         }
 
         public bool Insert(Entity e)
         {
-            return db.Update($"INSERT INTO Posts " +
+            Post post = (Post)e;
+            return db.Send($"INSERT INTO Posts " +
                              $"(contenutoPost, data_ora, miPiace, idUtente) " +
                              $"VALUES " +
-                             $"('{((Utente)e).ContenutoPost}', '{((Utente)e).Data_ora}', " +
-                             $"{((Utente)e).MiPiace}, {((Utente)e).IdUtente})");
+                             $"('{post.ContenutoPost}', '{post.Data_Ora}', " +
+                             $"{post.MiPiace}, {post.IdUtente})");
                                                                  
         }
 
         public bool Send(Entity e)
         {
-            return db.Update(
+            Post post = (Post)e;
+            return db.Send(
                              $"UPDATE Posts SET " +
-                             $"contenutoPost = '{((Utente)e).ContenutoPost}'," +
-                             $"data_ora = '{((Utente)e).Data_ora}'," +
-                             $"miPiace = {((Utente)e).MiPiace}, " +
-                             $"idUtente = {((Utente)e).IdUtente} " +
-                             $"WHERE id = {e.Id}"
+                             $"contenutoPost = '{post.ContenutoPost}'," +
+                             $"data_ora = '{post.Data_Ora}'," +
+                             $"miPiace = {post.MiPiace}, " +
+                             $"idUtente = {post.IdUtente} " +
+                             $"WHERE id = {post.Id}"
                             );
         }
 

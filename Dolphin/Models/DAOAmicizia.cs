@@ -1,8 +1,9 @@
-﻿
+﻿using System;
+using Utility;
 
 namespace Dolphin.Models
 {
-    public class DAOAmicizia : IDAO
+    public class DAOAmicizia
     {
         private Database db;
         public static DAOAmicizia instance = null;
@@ -40,12 +41,12 @@ namespace Dolphin.Models
 
         public bool Delete(int id)
         {
-            return db.Update($"DELETE FROM Amicizie WHERE id = {id}");
+            return db.Send($"DELETE FROM Amicizie WHERE id = {id}");
         }
 
         public bool Insert(Entity e)
         {
-            return db.Update($"INSERT INTO Amicizie " +
+            return db.Send($"INSERT INTO Amicizie " +
                              $"(idUtente, idUtente2) " +
                              $"VALUES " +
                              $"({((Amicizia)e).IdUtente}, {((Amicizia)e).IdUtente2})");
@@ -55,7 +56,7 @@ namespace Dolphin.Models
 
         public bool Send(Entity e)
         {
-            return db.Update(
+            return db.Send(
                              $"UPDATE Amicizie SET " +
                              $"idUtente = {((Amicizia)e).IdUtente}," +
                              $"idUtente2 = {((Amicizia)e).IdUtente2}," +

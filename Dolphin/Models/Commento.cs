@@ -7,8 +7,8 @@ namespace Dolphin.Models
         public string ContenutoCommento { get; set; }
         public DateTime Data_Ora { get; set; }
         public int MiPiace { get; set; }
-        public int idUtente { get; set; }
-        public int idPost { get; set; }
+        public int IdUtente { get; set; }
+        public int IdPost { get; set; }
         public Commento() 
         {
 

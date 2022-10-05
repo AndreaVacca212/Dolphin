@@ -6,7 +6,7 @@ namespace Dolphin.Models
         public string Nome { get; set; }
         public string Cognome { get; set; }
         public string Telefono { get; set; }
-        public string email { get; set; }
+        public string Email { get; set; }
         public string Pass { get; set; }
         public string Indirizzo { get; set; }
         public string Codice_Fiscale { get; set; }

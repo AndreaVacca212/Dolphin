@@ -1,8 +1,9 @@
-﻿
+﻿using System;
+using Utility;
 
 namespace Dolphin.Models
 {
-    public class DAOUtente : IDAO
+    public class DAOUtente
     {
         private Database db;
         public static DAOUtente instance = null;
@@ -40,22 +41,22 @@ namespace Dolphin.Models
 
         public bool Delete(int id)
         {
-            return db.Update($"DELETE FROM Utenti WHERE id = {id}");
+            return db.Send($"DELETE FROM Utenti WHERE id = {id}");
         }
 
-        public bool Insert(Entity e)
+        public bool Insert(Utente u)
         {
-            return db.Update($"INSERT INTO Utenti " +
+            return db.Send($"INSERT INTO Utenti " +
                              $"(nome, cognome, telefono, email, pass, indirizzo, codice_fiscale, fotoProfilo) " +
                              $"VALUES " +
-                             $"('{((Utente)e).Nome}', '{((Utente)e).Cognome}', " +
-                             $"'{((Utente)e).Telefono}', '{((Utente)e).Email}', '{((Utente)e).Pass}'," +
-                             $"'{((Utente)e).Indirizzo}', '{((Utente)e).Codice_fiscale}', '{((Utente)e).FotoProfilo}')");                                                         )");
+                             $"('{u.Nome}', '{u.Cognome}', " +
+                             $"'{u.Telefono}', '{u.Email}', '{u.Pass}'," +
+                             $"'{u.Indirizzo}', '{u.Codice_Fiscale}', '{u.FotoProfilo}')");                                         
         }
 
-        public bool Send(Entity e)
+        public bool Modifica(Entity e)
         {
-            return db.Update(
+            return db.Send(
                              $"UPDATE Utenti SET " +
                              $"nome = '{((Utente)e).Nome}'," +
                              $"cognome = '{((Utente)e).Cognome}'," +
@@ -78,9 +79,9 @@ namespace Dolphin.Models
             return null;
         }
 
-        public bool Valida(string username, string psw)
+        public bool Valida(string email, string pass)
         {
-            string query = $"SELECT * FROM Utenti WHERE email = '{email}' AND pass = '{pass}';";
+            string query = $"SELECT * FROM Utenti WHERE email = '{email}' AND pass = HASHBYTES('SHA2_256','{pass}');";
 
             Dictionary<string, string> riga = db.ReadOne(query);
 
@@ -89,10 +90,30 @@ namespace Dolphin.Models
             else
                 return false;
         }
-   
 
+        public Utente Cerca(int id)  // Cerca per id
+        {
+            string query = $"SELECT * FROM Utenti WHERE id = {id}";
+            //Inutile fare una lista di dictionary quando cerchiamo l'id perché è univoco
+            Dictionary<string, string> riga = db.ReadOne(query);
 
+            Utente user = new Utente();
+            user.FromDictionary(riga);
 
+            return user;
+        }
+
+        public Utente Cerca(string email)  // cerca per email
+        {
+            string query = $"SELECT * FROM Utenti WHERE email = '{email}'";
+            //Inutile fare una lista di dictionary quando cerchiamo l'id perché è univoco
+            Dictionary<string, string> riga = db.ReadOne(query);
+
+            Utente user = new Utente();
+            user.FromDictionary(riga);
+
+            return user;
+        }
 
 
     }
