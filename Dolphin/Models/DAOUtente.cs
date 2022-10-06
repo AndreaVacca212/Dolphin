@@ -26,7 +26,7 @@ namespace Dolphin.Models
         {
             List<Entity> ris = new List<Entity>();
 
-            List<Dictionary<string, string>> tabella = db.Read("SELECT * FROM Utenti ");
+            List<Dictionary<string, string>> tabella = db.Read("SELECT * FROM Utenti;");
 
             foreach (Dictionary<string, string> riga in tabella)
             {
@@ -35,6 +35,29 @@ namespace Dolphin.Models
 
                 ris.Add(a);
             }
+
+            return ris;
+        }
+
+
+
+
+
+        public List<Entity> Read2(int id)
+        {
+            List<Entity> ris = new List<Entity>();
+
+            Dictionary<string, string> tabella = db.ReadOne($"SELECT Utenti.id, Utenti.nome, Utenti.cognome, Utenti.fotoprofilo " +
+                                                               $"FROM Utenti " +
+                                                               $"WHERE Utenti.id = {id}");
+                                                             
+                Utente a = new Utente();
+                a.FromDictionary(tabella);
+
+                ris.Add(a);
+           
+                a.ListaPost = (DAOPost.GetInstance().ReadUtente(a.Id));
+
 
             return ris;
         }

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Threading.Tasks;
 using Dolphin.Models;
+using Dolphin.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -14,7 +16,7 @@ namespace Dolphin.Controllers
         // GET: /<controller>/
         public IActionResult UserAccount()
         {
-            return View(DAOUtente.GetInstance().Read());
+            return View(DAOUtente.GetInstance().Read2(HomeController.utenteLoggato.Id)[0]);
         }
 
         public IActionResult ModificaProfilo(int id)
@@ -33,7 +35,16 @@ namespace Dolphin.Controllers
                 return Content("Modifica Fallita");
         }
 
+        public IActionResult InserisciPost(Dictionary<string, string> parametri)
+        {
+            Post post = new Post();
+            post.FromDictionary(parametri);
 
+            if (DAOPost.GetInstance().Insert(post))
+                return RedirectToAction("UserAccount", "User");
+            else
+                return Content("Inserimento fallito");
+        }
     }
 }
 

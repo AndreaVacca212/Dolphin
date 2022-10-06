@@ -26,7 +26,7 @@ namespace Dolphin.Models
         {
             List<Entity> ris = new List<Entity>();
 
-            List<Dictionary<string, string>> tabella = db.Read("SELECT * FROM Posts ");
+            List<Dictionary<string, string>> tabella = db.Read("SELECT * FROM Posts;");
 
             foreach (Dictionary<string, string> riga in tabella)
             {
@@ -39,6 +39,25 @@ namespace Dolphin.Models
             return ris;
         }
 
+        public List<Entity> ReadUtente(int id)
+        {
+            List<Entity> ris = new List<Entity>();
+
+            List<Dictionary<string, string>> tabella = db.Read($"SELECT * FROM Posts WHERE Posts.idUtente = {id};");
+
+            foreach (Dictionary<string, string> riga in tabella)
+            {
+                Post a = new Post();
+                a.FromDictionary(riga);
+
+                ris.Add(a);
+            }
+
+            return ris;
+        }
+
+
+
         public bool Delete(int id)
         {
             return db.Send($"DELETE FROM Posts WHERE id = {id}");
@@ -50,10 +69,12 @@ namespace Dolphin.Models
             return db.Send($"INSERT INTO Posts " +
                              $"(contenutoPost, data_ora, miPiace, idUtente) " +
                              $"VALUES " +
-                             $"('{post.ContenutoPost}', '{post.Data_Ora}', " +
+                             $"('{post.ContenutoPost}', GETDATE(), " +
                              $"{post.MiPiace}, {post.IdUtente})");
                                                                  
         }
+
+       
 
         public bool Send(Entity e)
         {
