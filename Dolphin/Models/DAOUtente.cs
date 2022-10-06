@@ -50,7 +50,7 @@ namespace Dolphin.Models
                              $"(nome, cognome, telefono, email, pass, indirizzo, codice_fiscale, fotoProfilo) " +
                              $"VALUES " +
                              $"('{u.Nome}', '{u.Cognome}', " +
-                             $"'{u.Telefono}', '{u.Email}', '{u.Pass}'," +
+                             $"'{u.Telefono}', '{u.Email}',HASHBYTES('SHA2_256','{u.Pass}')," +
                              $"'{u.Indirizzo}', '{u.Codice_Fiscale}', '{u.FotoProfilo}')");                                         
         }
 
@@ -60,12 +60,11 @@ namespace Dolphin.Models
                              $"UPDATE Utenti SET " +
                              $"nome = '{((Utente)e).Nome}'," +
                              $"cognome = '{((Utente)e).Cognome}'," +
-                             $"telefono = {((Utente)e).Telefono}, " +
-                             $"email = '{((Utente)e).Email}' " +
-                             $"pass = '{((Utente)e).Pass}'," +
+                             $"telefono = '{((Utente)e).Telefono}', " +
+                             $"email = '{((Utente)e).Email}', " +
                              $"indirizzo = '{((Utente)e).Indirizzo}'," +
                              $"codice_Fiscale = '{((Utente)e).Codice_Fiscale}'," +
-                             $"fotoProfilo = '{((Utente)e).FotoProfilo}'," +
+                             $"fotoProfilo = '{((Utente)e).FotoProfilo}' " +
                              $"WHERE id = {e.Id}"
                             );
         }

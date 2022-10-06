@@ -16,6 +16,24 @@ namespace Dolphin.Controllers
         {
             return View(DAOUtente.GetInstance().Read());
         }
+
+        public IActionResult ModificaProfilo(int id)
+        {
+            return View(DAOUtente.GetInstance().Cerca(id));
+        }
+
+        public IActionResult ModificaUtente(Dictionary<string, string> parametri)
+        {
+            Utente user = new Utente();
+            user.FromDictionary(parametri);
+
+            if (DAOUtente.GetInstance().Modifica(user))
+                return RedirectToAction("UserAccount","User");
+            else
+                return Content("Modifica Fallita");
+        }
+
+
     }
 }
 

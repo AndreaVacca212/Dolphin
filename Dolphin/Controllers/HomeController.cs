@@ -32,8 +32,8 @@ namespace Dolphin.Controllers
                 il.LogInformation($"UTENTE LOGGATO: {parametri["email"]}");
 
                 utenteLoggato = DAOUtente.GetInstance().Cerca(parametri["email"]);
-  
-                    return RedirectToAction("UserAccount", "User");
+
+                return RedirectToAction("UserAccount", "User");
             }
             else
                 return Redirect("Index");
@@ -51,6 +51,15 @@ namespace Dolphin.Controllers
                 return Content("Registrazione fallita");
         }
 
+        public IActionResult Logout()
+        {
+            chiamata = -1;
+            il.LogInformation($"LOGOUT: {utenteLoggato.Nome}");
+            utenteLoggato = null;
+
+            return RedirectToAction("Index","Home");
+        }
+    
 
         // GET: /<controller>/
         public IActionResult Index()
@@ -59,4 +68,5 @@ namespace Dolphin.Controllers
         }
     }
 }
+
 
