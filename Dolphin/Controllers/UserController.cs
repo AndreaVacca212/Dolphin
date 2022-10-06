@@ -35,6 +35,14 @@ namespace Dolphin.Controllers
                 return Content("Modifica Fallita");
         }
 
+        public IActionResult EliminaPost(int id)
+        {
+            if (DAOPost.GetInstance().Delete(id))
+                return RedirectToAction("UserAccount","User");
+            else
+                return Content("Eliminazione Fallita");
+        }
+
         public IActionResult InserisciPost(Dictionary<string, string> parametri)
         {
             Post post = new Post();

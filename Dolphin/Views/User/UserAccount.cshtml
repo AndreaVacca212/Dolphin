@@ -98,6 +98,11 @@
                     </div><!-- /.panel-heading -->
                     <div class="panel-body no-padding rounded">
                         <ul class="list-group no-margin">
+                            @foreach (var m in ((Utente)Model).ListaAmicizie)
+                                {
+
+                                    <li class="list-group-item"><img src ="@(((Amicizia)m).FotoProfilo)" class="img-circle img-post"> @(((Amicizia)m).Nome) @(((Amicizia)m).Cognome)</li>
+                                }
                         </ul>
                     </div>
 
@@ -111,7 +116,7 @@
                     <div class="cover rounded shadow no-overflow">
                         <div class="inner-cover">
 
-                            <img src="https://free4kwallpapers.com/uploads/originals/2016/05/13/got-lucky-last-night-northern-lights-in-oregon-usa-wallpaper.jpg" class="img-responsive full-width" alt="cover" style="max-height:200px;">
+                            <img src="@HomeController.utenteLoggato.Copertina" class="img-responsive full-width" alt="cover" style="max-height:200px;">
                         </div>
                         <ul class="list-unstyled no-padding hidden-sm hidden-xs cover-menu">
                         </ul>
@@ -125,7 +130,7 @@
                         <input type="hidden" name="mipiace" value="0" />
                         <textarea class="form-control input-lg no-border" rows="2" name="contenutopost" placeholder="A cosa stai pensando? "></textarea>
                         <div class="panel-footer">
-                            <input type="submit" class="btn btn-primary pull-right mt-5">POST</input>
+                            <input type="submit" class="btn btn-primary pull-right mt-5" value="Invia"></input>
                             <ul class="nav nav-pills">
                             </ul><!-- /.nav nav-pills -->
                         </div><!-- /.panel-footer -->
@@ -151,7 +156,8 @@
                                         </div>
                                     </div><!-- /.pull-left -->
                                     <div class="pull-right">
-                                        <a href="#" class="text-white h4"><i class="fa fa-heart"></i> @(((Post)p).MiPiace)</a>
+                                        <a href="/User/EliminaPost/@(((Post)p).Id)" onclick="return confirm('Sei sicuro di voler eliminare il post?');" class="text-red h4"><i class="fa fa-trash" style="color: orange;"></i></a>
+                                        <a href="#" class="text-white h4"><i class="fa fa-heart" style="color: red;"></i> @(((Post)p).MiPiace)</a>
                                     </div><!-- /.pull-right -->
                                     <div class="clearfix"></div>
                                 </div><!-- /.panel-heading -->

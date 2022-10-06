@@ -11,8 +11,9 @@ namespace Dolphin.Models
         public string Indirizzo { get; set; }
         public string Codice_Fiscale { get; set; }
         public string FotoProfilo { get; set; }
+        public string Copertina { get; set; }
         public List<Entity> ListaPost { get; set; }
-
+        public List<Entity> ListaAmicizie { get; set; }
 
 
        // public int IdPost { get; set; }

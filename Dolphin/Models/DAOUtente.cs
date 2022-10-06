@@ -57,6 +57,7 @@ namespace Dolphin.Models
                 ris.Add(a);
            
                 a.ListaPost = (DAOPost.GetInstance().ReadUtente(a.Id));
+                a.ListaAmicizie = (DAOAmicizia.GetInstance().ReadAmicizia(a.Id));
 
 
             return ris;
@@ -70,25 +71,27 @@ namespace Dolphin.Models
         public bool Insert(Utente u)
         {
             return db.Send($"INSERT INTO Utenti " +
-                             $"(nome, cognome, telefono, email, pass, indirizzo, codice_fiscale, fotoProfilo) " +
+                             $"(nome, cognome, telefono, email, pass, indirizzo, codice_fiscale, fotoProfilo, copertina) " +
                              $"VALUES " +
                              $"('{u.Nome}', '{u.Cognome}', " +
                              $"'{u.Telefono}', '{u.Email}',HASHBYTES('SHA2_256','{u.Pass}')," +
-                             $"'{u.Indirizzo}', '{u.Codice_Fiscale}', '{u.FotoProfilo}')");                                         
+                             $"'{u.Indirizzo}', '{u.Codice_Fiscale}', '{u.FotoProfilo}', '{u.Copertina}')");                                         
         }
 
         public bool Modifica(Entity e)
         {
+            Utente user = (Utente)e;
             return db.Send(
                              $"UPDATE Utenti SET " +
-                             $"nome = '{((Utente)e).Nome}'," +
-                             $"cognome = '{((Utente)e).Cognome}'," +
-                             $"telefono = '{((Utente)e).Telefono}', " +
-                             $"email = '{((Utente)e).Email}', " +
-                             $"indirizzo = '{((Utente)e).Indirizzo}'," +
-                             $"codice_Fiscale = '{((Utente)e).Codice_Fiscale}'," +
-                             $"fotoProfilo = '{((Utente)e).FotoProfilo}' " +
-                             $"WHERE id = {e.Id}"
+                             $"nome = '{user.Nome}'," +
+                             $"cognome = '{user.Cognome}'," +
+                             $"telefono = '{user.Telefono}', " +
+                             $"email = '{user.Email}', " +
+                             $"indirizzo = '{user.Indirizzo}', " +
+                             $"codice_Fiscale = '{user.Codice_Fiscale}', " +
+                             $"fotoProfilo = '{user.FotoProfilo}'," +
+                             $"copertina = '{user.Copertina}' " +
+                             $"WHERE id = {user.Id}"
                             );
         }
 
