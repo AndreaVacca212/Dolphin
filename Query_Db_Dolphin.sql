@@ -11,13 +11,16 @@ create table Utenti
 	pass varchar(500),
 	indirizzo varchar(100),
 	codice_fiscale varchar(100),
-	fotoProfilo varchar(1000)
+	fotoProfilo varchar(1000),
+	copertina varchar(2000)
 );
 
 insert into Utenti(nome, cognome, telefono, email, pass, indirizzo, codice_fiscale, fotoProfilo) 
 values
 ('Luigi','Granchio','3914772658','LuigiGranchio00@outlet.com',HASHBYTES('SHA2_256', '1234'),'via santa lucia 15','GRNLGU90L06H501C','https://quintadimensione.it/uploads/products_image/file/11801/28072_FigurArts-LuigiA.jpg'),
 ('Mario', 'Delfino','3387465892','MarioDelfino99@gmail.com',HASHBYTES('SHA2_256', '5678'),'via la torre 46','DLFLGU69P13A794R','https://www.smartworld.it/wp-content/uploads/2018/02/Super-Mario-Film-1280x720.jpg');
+
+SELECT * FROM Utenti WHERE email = 'LuigiGranchio00@outlet.com' AND pass = HASHBYTES('SHA2_256', '1234');
 
 
 create table Posts
@@ -73,3 +76,39 @@ create table Amicizie
 	on update no action
 	on delete no action
 );
+
+select * from Utenti
+SELECT Utenti.id, Utenti.nome, Utenti.cognome,Posts.contenutoPost,Posts.data_ora, Posts.id As idPost, Posts.miPiace, Amicizie.id 
+FROM Utenti 
+INNER JOIN Posts ON Posts.idUtente = Utenti.id 
+INNER JOIN Amicizie ON Amicizie.idUtente2 = Utenti.id;
+
+SELECT *
+FROM Utenti 
+INNER JOIN Posts ON Posts.idUtente = Utenti.id
+INNER JOIN Commenti ON Commenti.idUtente = Utenti.id
+INNER JOIN Amicizie ON Amicizie.idUtente = Utenti.id
+
+SELECT Utenti2.nome, Utenti2.cognome, Utenti2.fotoProfilo
+FROM Utenti
+INNER JOIN Amicizie ON Utenti.id = Amicizie.idUtente
+INNER JOIN Utenti AS Utenti2 ON Amicizie.idUtente2 = Utenti2.id
+where utenti.id=1 or Amicizie.idUtente = 1
+
+/*SELECT * FROM
+Amicizie INNER JOIN Utenti on Utenti.id = Amicizie.idUtente
+INNER JOIN Amicizie AS Amicizie2 on Amicizie2.idUtente2 = Utenti.id
+where Utenti.id = 1 or Amicizie2.idUtente = 1;*/
+
+delete from Posts
+where id=6;
+
+select * from Amicizie
+
+insert into Amicizie
+(idUtente,idUtente2)
+VALUES
+(2,1);
+
+ALTER TABLE Utenti
+ADD copertina varchar(2000);
