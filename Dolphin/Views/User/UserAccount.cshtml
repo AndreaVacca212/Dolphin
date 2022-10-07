@@ -101,7 +101,7 @@
                             @foreach (var m in ((Utente)Model).ListaAmicizie)
                                 {
 
-                                    <li class="list-group-item"><img src ="@(((Amicizia)m).FotoProfilo)" class="img-circle img-post"> @(((Amicizia)m).Nome) @(((Amicizia)m).Cognome)</li>
+                                    <li class="list-group-item"><img src ="@(((Amicizia)m).FotoProfilo)" class="img-circle img-post">@(((Amicizia)m).Id) @(((Amicizia)m).Nome) @(((Amicizia)m).Cognome)</li>
                                 }
                         </ul>
                     </div>

@@ -43,7 +43,7 @@ namespace Dolphin.Models
         {
             List<Entity> ris = new List<Entity>();
 
-            List<Dictionary<string, string>> tabella = db.Read($"SELECT Utenti2.nome, Utenti2.cognome, Utenti2.fotoProfilo FROM Utenti INNER JOIN Amicizie ON Utenti.id = Amicizie.idUtente INNER JOIN Utenti AS Utenti2 ON Amicizie.idUtente2 = Utenti2.id WHERE utenti.id={id} OR Amicizie.idUtente = {id};");
+            List<Dictionary<string, string>> tabella = db.Read($"SELECT Utenti2.id, Utenti2.nome, Utenti2.cognome, Utenti2.fotoProfilo FROM Utenti INNER JOIN Amicizie ON Utenti.id = Amicizie.idUtente INNER JOIN Utenti AS Utenti2 ON Amicizie.idUtente2 = Utenti2.id WHERE utenti.id={id} OR Amicizie.idUtente = {id};");
 
             foreach (Dictionary<string, string> riga in tabella)
             {

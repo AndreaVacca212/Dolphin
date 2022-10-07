@@ -47,9 +47,9 @@ namespace Dolphin.Models
         {
             List<Entity> ris = new List<Entity>();
 
-            Dictionary<string, string> tabella = db.ReadOne($"SELECT Utenti.id, Utenti.nome, Utenti.cognome, Utenti.fotoprofilo " +
-                                                               $"FROM Utenti " +
-                                                               $"WHERE Utenti.id = {id}");
+            Dictionary<string, string> tabella = db.ReadOne($"SELECT * " +
+                                                            $"FROM UtentiView " +
+                                                            $"WHERE id = {id}");
                                                              
                 Utente a = new Utente();
                 a.FromDictionary(tabella);
@@ -58,6 +58,28 @@ namespace Dolphin.Models
            
                 a.ListaPost = (DAOPost.GetInstance().ReadUtente(a.Id));
                 a.ListaAmicizie = (DAOAmicizia.GetInstance().ReadAmicizia(a.Id));
+
+
+            return ris;
+        }
+
+        public List<Entity> Read3()
+        {
+            List<Entity> ris = new List<Entity>();
+
+            List<Dictionary<string, string>> tabella = db.Read($"SELECT * " +
+                                                            $"FROM UtentiView ;");
+            foreach(Dictionary<string, string> riga in tabella)
+            {
+                Utente a = new Utente();
+                a.FromDictionary(riga);
+
+                ris.Add(a);
+
+                a.ListaPost = (DAOPost.GetInstance().ReadUtente(a.Id));
+                a.ListaAmicizie = (DAOAmicizia.GetInstance().ReadAmicizia(a.Id));
+            }
+            
 
 
             return ris;

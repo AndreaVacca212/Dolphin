@@ -33,10 +33,15 @@ namespace Dolphin.Controllers
 
                 utenteLoggato = DAOUtente.GetInstance().Cerca(parametri["email"]);
 
-                return RedirectToAction("UserAccount", "User");
+                return RedirectToAction("Bacheca", "Home");
             }
             else
                 return Redirect("Index");
+        }
+
+        public IActionResult Bacheca()
+        {
+            return View(DAOUtente.GetInstance().Read3());
         }
 
         public IActionResult Salva(Dictionary<string, string> parametri)
