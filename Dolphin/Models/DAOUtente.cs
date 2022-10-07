@@ -59,7 +59,6 @@ namespace Dolphin.Models
                 a.ListaPost = (DAOPost.GetInstance().ReadUtente(a.Id));
                 a.ListaAmicizie = (DAOAmicizia.GetInstance().ReadAmicizia(a.Id));
 
-
             return ris;
         }
 

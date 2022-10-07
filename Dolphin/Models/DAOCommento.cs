@@ -16,7 +16,6 @@ namespace Dolphin.Models
         {
             return instance == null ? new DAOCommento() : instance;
 
-
         }
 
         public List<Entity> Read()

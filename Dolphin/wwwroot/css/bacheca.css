@@ -595,7 +595,6 @@ select.form-control:not([size]):not([multiple]) {
         display: inline-block;
         line-height: 20px
     }
-
     .timeline-likes .stats-icon {
         float: left;
         margin-right: 5px;

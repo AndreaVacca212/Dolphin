@@ -11,7 +11,6 @@ namespace Dolphin.Models
         public int IdPost { get; set; }
         public Commento() 
         {
-
         }
 
     }

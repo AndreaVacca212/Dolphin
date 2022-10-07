@@ -68,7 +68,6 @@ namespace Dolphin.Models
                              $"VALUES " +
                              $"({((Amicizia)e).IdUtente}, {((Amicizia)e).IdUtente2})");
            
-
         }
 
         public bool Send(Entity e)

@@ -11,7 +11,6 @@ namespace Dolphin.Models
         public string FotoProfilo { get; set; }
         public Amicizia() 
         {
-
         }
     }
 }

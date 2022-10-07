@@ -10,7 +10,6 @@ namespace Dolphin.Models
         public int IdUtente { get; set; }
         public Post ()
         {
-
         }
     }
 }

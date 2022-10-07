@@ -15,7 +15,6 @@ namespace Dolphin.Models
         public List<Entity> ListaPost { get; set; }
         public List<Entity> ListaAmicizie { get; set; }
 
-
        // public int IdPost { get; set; }
        // public string ContenutoPost { get; set; }
         //public DateTime Data_Ora { get; set; }
