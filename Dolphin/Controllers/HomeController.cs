@@ -44,6 +44,7 @@ namespace Dolphin.Controllers
             return View(DAOBacheca.GetInstance().Read(utenteLoggato.Id));
         }
 
+
         public IActionResult NuovoLike(int id)
         {
             if (DAOBacheca.GetInstance().InsertLikes(id))
