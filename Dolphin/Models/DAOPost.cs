@@ -51,12 +51,48 @@ namespace Dolphin.Models
                 a.FromDictionary(riga);
 
                 ris.Add(a);
+                a.MiPiacePosts = (DAOPost.GetInstance().ReadLikes(a.Id));
             }
 
             return ris;
         }
 
+       /* public List<Entity> Read2(int id)
+        {
+            List<Entity> ris = new List<Entity>();
 
+            List<Dictionary<string, string>> tabella = db.Read($"SELECT * FROM Posts WHERE id = {id}");
+
+            foreach (Dictionary<string, string> riga in tabella)
+            {
+                Post post = new Post();
+                post.FromDictionary(riga);
+
+                ris.Add(post);
+
+                post.MiPiacePosts = (DAOPost.GetInstance().ReadLikes(post.Id));
+            }
+
+            return ris;
+
+        }*/
+
+        public List<Entity> ReadLikes(int id)
+        {
+            List<Entity> ris = new List<Entity>();
+
+            List<Dictionary<string, string>> tabella = db.Read($"select * FROM MiPiacePosts WHERE idPost = {id};");
+
+            foreach (Dictionary<string, string> riga in tabella)
+            {
+                Post a = new Post();
+                a.FromDictionary(riga);
+
+                ris.Add(a);
+            }
+
+            return ris;
+        }
 
         public bool Delete(int id)
         {
@@ -67,10 +103,10 @@ namespace Dolphin.Models
         {
             Post post = (Post)e;
             return db.Send($"INSERT INTO Posts " +
-                             $"(contenutoPost, data_ora, miPiace, idUtente) " +
+                             $"(contenutoPost, data_ora, idUtente) " +
                              $"VALUES " +
                              $"('{post.ContenutoPost}', GETDATE(), " +
-                             $"{post.MiPiace}, {post.IdUtente})");
+                             $"{post.IdUtente})");
                                                                  
         }
 
@@ -83,7 +119,6 @@ namespace Dolphin.Models
                              $"UPDATE Posts SET " +
                              $"contenutoPost = '{post.ContenutoPost}'," +
                              $"data_ora = '{post.Data_Ora}'," +
-                             $"miPiace = {post.MiPiace}, " +
                              $"idUtente = {post.IdUtente} " +
                              $"WHERE id = {post.Id}"
                             );

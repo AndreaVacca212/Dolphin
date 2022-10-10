@@ -41,7 +41,17 @@ namespace Dolphin.Controllers
 
         public IActionResult Bacheca()
         {
-            return View(DAOUtente.GetInstance().Read3());
+            return View(DAOBacheca.GetInstance().Read(utenteLoggato.Id));
+        }
+
+        public IActionResult NuovoLike(int id)
+        {
+            if (DAOBacheca.GetInstance().InsertLikes(id))
+            {
+                return RedirectToAction("Bacheca", "Home");
+            }
+            else
+                return Content("Like fallito");
         }
 
         public IActionResult Salva(Dictionary<string, string> parametri)

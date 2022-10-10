@@ -57,6 +57,7 @@ namespace Dolphin.Models
                 ris.Add(a);
            
                 a.ListaPost = (DAOPost.GetInstance().ReadUtente(a.Id));
+                
                 a.ListaAmicizie = (DAOAmicizia.GetInstance().ReadAmicizia(a.Id));
 
             return ris;
@@ -67,7 +68,7 @@ namespace Dolphin.Models
             List<Entity> ris = new List<Entity>();
 
             List<Dictionary<string, string>> tabella = db.Read($"SELECT * " +
-                                                            $"FROM UtentiView ;");
+                                                               $"FROM UtentiView ;");
             foreach(Dictionary<string, string> riga in tabella)
             {
                 Utente a = new Utente();

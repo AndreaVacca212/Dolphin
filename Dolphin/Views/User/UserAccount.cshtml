@@ -52,7 +52,7 @@
                                     <img data-no-retina="" class=" img-responsive img-bordered-primary" src="@HomeController.utenteLoggato.FotoProfilo" alt="John Doe">
                                 </li>
                                 <li class="text-center">
-                                    <h4 class="text-capitalize">@HomeController.utenteLoggato.Id @HomeController.utenteLoggato.Nome @HomeController.utenteLoggato.Cognome</h4>
+                                    <h4 class="text-capitalize"> @HomeController.utenteLoggato.Nome @HomeController.utenteLoggato.Cognome</h4>
                                     <p class="text-muted text-capitalize"></p>
                                 </li>
                                 <li><br></li>
@@ -100,7 +100,7 @@
                             @foreach (var m in ((Utente)Model).ListaAmicizie)
                                 {
 
-                                    <li class="list-group-item"><img src ="@(((Amicizia)m).FotoProfilo)" class="img-circle img-post">@(((Amicizia)m).Id) @(((Amicizia)m).Nome) @(((Amicizia)m).Cognome)</li>
+                                    <li class="list-group-item"><img src ="@(((Amicizia)m).FotoProfilo)" class="img-circle img-post"> @(((Amicizia)m).Nome) @(((Amicizia)m).Cognome)</li>
                                 }
                         </ul>
                     </div>
@@ -156,7 +156,7 @@
                                     </div><!-- /.pull-left -->
                                     <div class="pull-right">
                                         <a href="/User/EliminaPost/@(((Post)p).Id)" onclick="return confirm('Sei sicuro di voler eliminare il post?');" class="text-red h4"><i class="fa fa-trash" style="color: orange;"></i></a>
-                                        <a href="#" class="text-white h4"><i class="fa fa-heart" style="color: red;"></i> @(((Post)p).MiPiace)</a>
+                                        <a href="#" class="text-white h4"><i class="fa fa-heart" style="color: red;"></i> @(((Post)p).MiPiacePosts.Count) </a>
                                     </div><!-- /.pull-right -->
                                     <div class="clearfix"></div>
                                 </div><!-- /.panel-heading -->

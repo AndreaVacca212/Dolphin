@@ -1,765 +1,474 @@
 ﻿@model List<Utility.Entity>
 @using Dolphin.Controllers
 @using Dolphin.Models
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <!--  All snippets are MIT license http://bootdey.com/license -->
-    <title>bs4 profile with timeline posts - Bootdey.com</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/js/bootstrap.bundle.min.js"></script>
-</head>
-<body>
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div id="content" class="content content-full-width">
-                    <!-- begin profile-content -->
-                    <div class="profile-content">
-                        <!-- begin tab-content -->
-                        <div class="tab-content p-0">
-                            <!-- begin #profile-post tab -->
-                            <div class="tab-pane fade active show" id="profile-post">
-                                <!-- begin timeline -->
-                                <ul class="timeline">
-                                    @foreach (var p in Model)
-                                    {
-                                        <li>
-                                            <!-- begin timeline-time -->
-                                            @foreach (Post x in ((Utente)p).ListaPost)
-                                            {
-                                                <div class="timeline-time">
 
-                                                    <span class="time"></span>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Dolphin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" type="text/css" href="~/css/animate.css">
+    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/css/line-awesome.css">
+    <link rel="stylesheet" type="text/css" href="~/css/line-awesome-font-awesome.min.css">
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="~/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/css/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" type="text/css" href="~/lib/slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="~/lib/slick/slick-theme.css">
+    <link rel="stylesheet" type="text/css" href="~/css/style.css">
+    <link rel="stylesheet" type="text/css" href="~/css/responsive.css">
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <header>
+            <div class="container">
+                <div class="header-data">
+                    <div class="logo">
+                        <a href="index.html" title=""><img src="img/Logo Progetto 5" alt=""></a>
+                    </div><!--logo end-->
+                    <div class="search-bar">
+                        <form>
+                            <input type="text" name="search" placeholder="Cerca...">
+                            <button type="submit"><i class="la la-search"></i></button>
+                        </form>
+                    </div><!--search-bar end-->
+                    <nav>
+                        <ul>
+                            <li>
+                                <a href="index.html" title="">
+                                    <span><img src="~/img/icon1.png" alt=""></span>
+                                    Home
+                                </a>
+                            </li>
+                            <li>
+                                <a href="profiles.html" title="">
+                                    <span><img src="~/img/icon4.png" alt=""></span>
+                                    Amici
+                                </a>
+                                <ul>
+                                    <li><a href="user-profile.html" title="">User Profile</a></li>
+                                    <li><a href="my-profile-feed.html" title="">my-profile-feed</a></li>
+                                </ul>
+                            </li>
+                            <!--<li>
+        <a href="#" title="" class="not-box-open">
+            <span><img src="~/img/icon7.png" alt=""></span>
+            Notification
+        </a>
+        <div class="notification-box noti" id="notification">
+            <div class="nt-title">
+                <h4>Setting</h4>
+                <a href="#" title="">Clear all</a>
+            </div>
+            <div class="nott-list">
+                <div class="notfication-details">
+                    <div class="noty-user-img">
+                        <img src="~/img/resources/ny-img1.png" alt="">
+                    </div>
+                    <div class="notification-info">
+                        <h3><a href="#" title="">Jassica William</a> Comment on your project.</h3>
+                        <span>2 min ago</span>
+                    </div>notification-info
+                </div>
+                <div class="notfication-details">
+                    <div class="noty-user-img">
+                        <img src="~/img/resources/ny-img2.png" alt="">
+                    </div>
+                    <div class="notification-info">
+                        <h3><a href="#" title="">Jassica William</a> Comment on your project.</h3>
+                        <span>2 min ago</span>
+                    </div>notification-info
+                </div>
+                <div class="notfication-details">
+                    <div class="noty-user-img">
+                        <img src="~/img/resources/ny-img3.png" alt="">
+                    </div>
+                    <div class="notification-info">
+                        <h3><a href="#" title="">Jassica William</a> Comment on your project.</h3>
+                        <span>2 min ago</span>
+                    </div>notification-info
+                </div>
+                <div class="notfication-details">
+                    <div class="noty-user-img">
+                        <img src="~/img/resources/ny-img2.png" alt="">
+                    </div>
+                    <div class="notification-info">
+                        <h3><a href="#" title="">Jassica William</a> Comment on your project.</h3>
+                        <span>2 min ago</span>
+                    </div>notification-info
+                </div>
+                <div class="view-all-nots">
+                    <a href="#" title="">View All Notification</a>
+                </div>
+            </div>nott-list end
+        </div>notification-box end
+    </li> -->
+                        </ul>
+                    </nav><!--nav end-->
+                    <div class="menu-btn">
+                        <a href="#" title=""><i class="fa fa-bars"></i></a>
+                    </div><!--menu-btn end-->
+                    <div class="user-account">
+                        <div class="user-info">
+                            <img src="@HomeController.utenteLoggato.FotoProfilo" style="width: 35%; alt="">
+                            <a href="#" title="">@HomeController.utenteLoggato.Nome</a>
+                            <i class="la la-sort-down"></i>
+                        </div>
+                        <div class="user-account-settingss" id="users">
+                            <ul class="us-links">
+                                <li><a href="profile-account-setting.html" title="">Impostazioni Account</a></li>
+                            </ul>
+                            <h3 class="tc"><a href="sign-in.html" title="">Logout</a></h3>
+                        </div><!--user-account-settingss end-->
+                    </div>
+                </div><!--header-data end-->
+            </div>
+        </header><!--header end-->
+
+        <main>
+            <div class="main-section">
+                <div class="container">
+                    <div class="main-section-data">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-4 pd-left-none no-pd">
+                                <div class="main-left-sidebar no-margin">
+                                    <div class="user-data full-width">
+                                        <div class="user-profile">
+                                            <div class="username-dt">
+                                                <div class="usr-pic">
+                                                    <img src="@HomeController.utenteLoggato.FotoProfilo" alt="">
                                                 </div>
-                                                <!-- end timeline-time -->
-                                                <!-- begin timeline-icon -->
-                                                <div class="timeline-icon">
-                                                    <a href="javascript:;">&nbsp;</a>
+                                            </div><!--username-dt end-->
+                                            <div class="user-specs">
+                                                <h3>@HomeController.utenteLoggato.Nome @HomeController.utenteLoggato.Cognome</h3>
+                                                <span>@HomeController.utenteLoggato.Email</span>
+                                            </div>
+                                        </div><!--user-profile end-->
+                                        <ul class="user-fw-status">
+                                            <li>
+                                                <h4>Amici</h4>
+                                                <span>155</span>
+                                            </li>
+                                            <li>
+                                                <a href="my-profile.html" title="">Vedi Profilo</a>
+                                            </li>
+                                        </ul>
+                                    </div><!--user-data end-->
+
+                                    <div class="tags-sec full-width">
+                                        <ul>
+                                            <li><a href="#" title="">Help Center</a></li>
+                                            <li><a href="#" title="">About</a></li>
+                                            <li><a href="#" title="">Privacy Policy</a></li>
+                                            <li><a href="#" title="">Community Guidelines</a></li>
+                                            <li><a href="#" title="">Cookies Policy</a></li>
+                                            <li><a href="#" title="">Career</a></li>
+                                            <li><a href="#" title="">Language</a></li>
+                                            <li><a href="#" title="">Copyright Policy</a></li>
+                                        </ul>
+                                        <div class="cp-sec">
+                                            <img src="~/img/logo2.png" alt="">
+                                            <p><img src="~/img/cp.png" alt="">Copyright 2022</p>
+                                        </div>
+                                    </div><!--tags-sec end-->
+                                </div><!--main-left-sidebar end-->
+                            </div>
+                            <div class="col-lg-6 col-md-8 no-pd">
+                                <div class="main-ws-sec">
+                                    <div class="post-topbar">
+                                        <div class="user-picy">
+                                            <img src="@HomeController.utenteLoggato.FotoProfilo" alt="">
+                                        </div>
+                                        <div class="post-st">
+                                            <ul>
+                                                <li><a class="post-jb active" href="#" title="">Post a Job</a></li>
+                                            </ul>
+                                        </div><!--post-st end-->
+                                    </div><!--post-topbar end-->
+                                    <div class="posts-section">
+                                        @foreach (var p in Model)
+                                            {
+
+
+                                                <div class="posty">
+                                        <div class="post-bar no-margin">
+                                            <div class="post_topbar">
+                                                <div class="usy-dt">
+                                                    <img src="@(((Bacheca)p).FotoUtente)" alt="" style="width:20%">
+                                                    <div class="usy-name">
+                                                        <h3>@(((Bacheca)p).NomeUtente) @(((Bacheca)p).CognomeUtente)</h3>
+                                                        <span><img src="~/img/clock.png" alt="">@(((Bacheca)p).Data_Ora)</span>
+                                                    </div>
                                                 </div>
-                                                <!-- end timeline-icon -->
-                                                <!-- begin timeline-body -->
-                                                <div class="timeline-body">
-                                                    <div class="timeline-header">
-                                                        <span class="userimage"><img src="@(((Utente)p).FotoProfilo)" alt=""></span>
-                                                        <span class="username"><a href="javascript:;">@(((Utente)p).Nome) @(((Utente)p).Cognome)         @(x.Data_Ora)</a> <small></small></span>
-                                                    </div>
-                                                    <div class="timeline-content">
-                                                        <p>
-                                                            @(x.ContenutoPost)
-                                                        </p>
-                                                    </div>
-                                                    <div class="timeline-likes">
-                                                        <div class="stats-right">
-                                                            <span class="stats-text">0 Shares</span>
-                                                            <span class="stats-text">0 Comments</span>
-                                                        </div>
-                                                        <div class="stats">
-                                                            <span class="fa-stack fa-fw stats-icon">
-                                                                <i class="fa fa-circle fa-stack-2x text-danger"></i>
-                                                                <i class="fa fa-heart fa-stack-1x fa-inverse t-plus-1"></i>
-                                                            </span>
-                                                            <span class="fa-stack fa-fw stats-icon">
-                                                                <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                                                                <i class="fa fa-thumbs-up fa-stack-1x fa-inverse"></i>
-                                                            </span>
-                                                            <span class="stats-total">4.3k</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="timeline-footer">
-                                                        <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-thumbs-up fa-fw fa-lg m-r-3"></i> Like</a>
-                                                        <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-comments fa-fw fa-lg m-r-3"></i> Comment</a>
-                                                    </div>
-                                                    <div class="timeline-comment-box">
-                                                        <div class="user"><img src="@HomeController.utenteLoggato.FotoProfilo"></div>
-                                                        <div class="input">
-                                                            <form action="">
-                                                                <div class="input-group">
-                                                                    <input type="text" class="form-control rounded-corner" placeholder="Write a comment...">
-                                                                    <span class="input-group-btn p-l-10">
-                                                                        <button class="btn btn-primary f-s-12 rounded-corner" type="button">Commenta</button>
-                                                                    </span>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
+                                                <div class="ed-opts">
+                                                    <a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
+                                                    <ul class="ed-options">
+                                                        <li><a href="#" title="">Modifica Post</a></li>
+                                                    </ul>
                                                 </div>
-                                                <br />
+                                            </div>
+                                            <div class="job_descp">
+                                                <p>@(((Bacheca)p).ContenutoPost)</p>
+                                            </div>
+                                            <div class="job-status-bar">
+                                                <ul class="like-com">
+                                                    <li>
+                                                        <a href="#"><i class="fas fa-heart"></i> Mi piace</a>
+                                                        <img src="~/img/liked-img.png" alt="">
+                                                        <span>CONTEGGIO LIKE</span>
+                                                    </li>
+                                                    <li><a href="#" class="com"><i class="fas fa-comment-alt"></i> Commenti 15</a></li>
+                                                </ul>
+                                            </div>
+                                        </div><!--post-bar end-->
+                                        <div class="comment-section">
+                                            <div class="comment-sec">
+                                                <ul>
+                                                    <li>
+                                                        <div class="comment-list">
+                                                            <div class="bg-img">
+                                                                <img src="~/img/resources/bg-img1.png" alt="">
+                                                            </div>
+                                                            <div class="comment">
+                                                                <h3>Utente commento</h3>
+                                                                <span><img src="~/img/clock.png" alt=""> 3 min ago</span>
+                                                                <p>TESTO COMMENTO </p>
+                                                            </div>
+                                                        </div><!--comment-list end-->
+                                                        <ul>
+                                                            <li>
+                                                                <div class="comment-list">
+                                                                    <!--<div class="bg-img">
+                                    <img src="images/resources/bg-img2.png" alt="">
+                                </div> -->
+                                                                    <!--<div class="comment">
+                                    <h3></h3>
+                                    <span><img src="images/clock.png" alt=""></span>
+                                    <p>Hi John </p>
+                                    <a href="#" title=""><i class="fa fa-reply-all"></i>Reply</a>
+                                </div> -->
+                                                                </div><!--comment-list end-->
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>
+                                                    </li>
+                                                </ul>
+                                            </div><!--comment-sec end-->
+                                            <div class="post-comment">
+                                                <div class="cm_img">
+                                                    <img src="~/img/resources/bg-img4.png" alt="">
+                                                </div>
+                                                <div class="comment_box">
+                                                    <form>
+                                                        <input type="text" placeholder="Scrivi un commento">
+                                                        <button type="submit">Invia</button>
+                                                    </form>
+                                                </div>
+                                            </div><!--post-comment end-->
+                                        </div><!--comment-section end-->
+                                    </div><!--posty end-->
+                                    <!--FINE FOREACH-->
                                             }
 
-                                            <!-- end timeline-body -->
-                                        </li>
-                                    }
-                                </ul>
-                                    <!-- end timeline -->
-                                </div>
-                                <!-- end #profile-post tab -->
+
+                                    <div class="top-profiles">
+                                        <div class="pf-hd">
+                                            <h3>Creatori</h3>
+                                            <i class="la la-ellipsis-v"></i>
+                                        </div>
+                                        <div class="profiles-slider">
+                                            <div class="user-profy">
+                                                <img src="~/img/resources/user1.png" alt="">
+                                                <h3>Nino</h3>
+                                                <span>Graphic Designer</span>
+                                                <ul>
+                                                    <li><a href="#" title="" class="followw">Follow</a></li>
+                                                    <li><a href="#" title="" class="envlp"><img src="~/img/envelop.png" alt=""></a></li>
+                                                    <li><a href="#" title="" class="hire">hire</a></li>
+                                                </ul>
+                                                <a href="#" title="">View Profile</a>
+                                            </div><!--user-profy end-->
+                                            <div class="user-profy">
+                                                <img src="~/img/resources/user2.png" alt="">
+                                                <h3>Andrea </h3>
+                                                <span>Graphic Designer</span>
+                                                <ul>
+                                                    <li><a href="#" title="" class="followw">Follow</a></li>
+                                                    <li><a href="#" title="" class="envlp"><img src="~/img/envelop.png" alt=""></a></li>
+                                                    <li><a href="#" title="" class="hire">hire</a></li>
+                                                </ul>
+                                                <a href="#" title="">View Profile</a>
+                                            </div><!--user-profy end-->
+                                            <div class="user-profy">
+                                                <img src="~/img/resources/user3.png" alt="">
+                                                <h3>Ahmed</h3>
+                                                <span>Graphic Designer</span>
+                                                <ul>
+                                                    <li><a href="#" title="" class="followw">Follow</a></li>
+                                                    <li><a href="#" title="" class="envlp"><img src="~/img/envelop.png" alt=""></a></li>
+                                                    <li><a href="#" title="" class="hire">hire</a></li>
+                                                </ul>
+                                                <a href="#" title="">View Profile</a>
+                                            </div><!--user-profy end-->
+                                            <div class="user-profy">
+                                                <img src="~/img/resources/user1.png" alt="">
+                                                <h3>Giovanni</h3>
+                                                <span>Graphic Designer</span>
+                                                <ul>
+                                                    <li><a href="#" title="" class="followw">Follow</a></li>
+                                                    <li><a href="#" title="" class="envlp"><img src="~/img/envelop.png" alt=""></a></li>
+                                                    <li><a href="#" title="" class="hire">hire</a></li>
+                                                </ul>
+                                                <a href="#" title="">Vedi Profilo</a>
+                                            </div><!--user-profy end-->
+                                        </div><!--profiles-slider end-->
+                                    </div><!--top-profiles end-->
+
+                                    </div><!--posts-section end-->
+                                </div><!--main-ws-sec end-->
                             </div>
-                            <!-- end tab-content -->
-                        </div>
-                        <!-- end profile-content -->
+                            <div class="col-lg-3 pd-right-none no-pd">
+                                <div class="right-sidebar">
+                                    <div class="widget widget-about">
+                                        <img src="~/img/Logo Progetto 5.jpg" alt="">
+                                        <h3>Dolphin</h3>
+
+                                    </div><!--widget-about end-->
+
+                                </div>
+                            </div>
+                        </div><!-- main-section-data end-->
                     </div>
                 </div>
-            </div>
-        </div>
+        </main>
+
+
+
+
+        <div class="post-popup pst-pj">
+            <div class="post-project">
+                <h3>Post a project</h3>
+                <div class="post-project-fields">
+                    <form>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <input type="text" name="title" placeholder="Title">
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="inp-field">
+                                    <select>
+                                        <option>Category</option>
+                                        <option>Category 1</option>
+                                        <option>Category 2</option>
+                                        <option>Category 3</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <input type="text" name="skills" placeholder="Skills">
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="price-sec">
+                                    <div class="price-br">
+                                        <input type="text" name="price1" placeholder="Price">
+                                        <i class="la la-dollar"></i>
+                                    </div>
+                                    <span>To</span>
+                                    <div class="price-br">
+                                        <input type="text" name="price1" placeholder="Price">
+                                        <i class="la la-dollar"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <textarea name="description" placeholder="Description"></textarea>
+                            </div>
+                            <div class="col-lg-12">
+                                <ul>
+                                    <li><button class="active" type="submit" value="post">Post</button></li>
+                                    <li><a href="#" title="">Cancel</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </form>
+                </div><!--post-project-fields end-->
+                <a href="#" title=""><i class="la la-times-circle-o"></i></a>
+            </div><!--post-project end-->
+        </div><!--post-project-popup end-->
+
+        <div class="post-popup job_post">
+            <div class="post-project">
+                <h3>Post a job</h3>
+                <div class="post-project-fields">
+                    <form>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <input type="text" name="title" placeholder="Title">
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="inp-field">
+                                    <select>
+                                        <option>Category</option>
+                                        <option>Category 1</option>
+                                        <option>Category 2</option>
+                                        <option>Category 3</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <input type="text" name="skills" placeholder="Skills">
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="price-br">
+                                    <input type="text" name="price1" placeholder="Price">
+                                    <i class="la la-dollar"></i>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="inp-field">
+                                    <select>
+                                        <option>Full Time</option>
+                                        <option>Half time</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <textarea name="description" placeholder="Description"></textarea>
+                            </div>
+                            <div class="col-lg-12">
+                                <ul>
+                                    <li><button class="active" type="submit" value="post">Post</button></li>
+                                    <li><a href="#" title="">Cancel</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </form>
+                </div><!--post-project-fields end-->
+                <a href="#" title=""><i class="la la-times-circle-o"></i></a>
+            </div><!--post-project end-->
+        </div><!--post-project-popup end-->
 
-        <style type="text/css">
-            body {
-                margin-top: 20px;
-                background: #eee;
-            }
 
-            .profile-header {
-                position: relative;
-                overflow: hidden
-            }
 
-                .profile-header .profile-header-cover {
-                    background-image: url(https://bootdey.com/img/Content/bg1.jpg);
-                    background-size: cover;
-                    background-position: center;
-                    background-repeat: no-repeat;
-                    position: absolute;
-                    left: 0;
-                    right: 0;
-                    top: 0;
-                    bottom: 0
-                }
 
-                    .profile-header .profile-header-cover:before {
-                        content: '';
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        right: 0;
-                        bottom: 0;
-                        background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, .75) 100%)
-                    }
+    </div><!--theme-layout end-->
 
-                .profile-header .profile-header-content {
-                    color: #fff;
-                    padding: 25px
-                }
 
-            .profile-header-img {
-                float: left;
-                width: 120px;
-                height: 120px;
-                overflow: hidden;
-                position: relative;
-                z-index: 10;
-                margin: 0 0 -20px;
-                padding: 3px;
-                border-radius: 4px;
-                background: #fff
-            }
 
-                .profile-header-img img {
-                    max-width: 100%
-                }
+    <script type="text/javascript" src="~/js/jquery.min.js"></script>
+    <script type="text/javascript" src="~/js/popper.js"></script>
+    <script type="text/javascript" src="~/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/js/jquery.mCustomScrollbar.js"></script>
+    <script type="text/javascript" src="~/lib/slick/slick.min.js"></script>
+    <script type="text/javascript" src="~/js/scrollbar.js"></script>
+    <script type="text/javascript" src="~/js/script.js"></script>
 
-            .profile-header-info h4 {
-                font-weight: 500;
-                color: #fff
-            }
-
-            .profile-header-img + .profile-header-info {
-                margin-left: 140px
-            }
-
-            .profile-header .profile-header-content,
-            .profile-header .profile-header-tab {
-                position: relative
-            }
-
-            .b-minus-1,
-            .b-minus-10,
-            .b-minus-2,
-            .b-minus-3,
-            .b-minus-4,
-            .b-minus-5,
-            .b-minus-6,
-            .b-minus-7,
-            .b-minus-8,
-            .b-minus-9,
-            .b-plus-1,
-            .b-plus-10,
-            .b-plus-2,
-            .b-plus-3,
-            .b-plus-4,
-            .b-plus-5,
-            .b-plus-6,
-            .b-plus-7,
-            .b-plus-8,
-            .b-plus-9,
-            .l-minus-1,
-            .l-minus-2,
-            .l-minus-3,
-            .l-minus-4,
-            .l-minus-5,
-            .l-minus-6,
-            .l-minus-7,
-            .l-minus-8,
-            .l-minus-9,
-            .l-plus-1,
-            .l-plus-10,
-            .l-plus-2,
-            .l-plus-3,
-            .l-plus-4,
-            .l-plus-5,
-            .l-plus-6,
-            .l-plus-7,
-            .l-plus-8,
-            .l-plus-9,
-            .r-minus-1,
-            .r-minus-10,
-            .r-minus-2,
-            .r-minus-3,
-            .r-minus-4,
-            .r-minus-5,
-            .r-minus-6,
-            .r-minus-7,
-            .r-minus-8,
-            .r-minus-9,
-            .r-plus-1,
-            .r-plus-10,
-            .r-plus-2,
-            .r-plus-3,
-            .r-plus-4,
-            .r-plus-5,
-            .r-plus-6,
-            .r-plus-7,
-            .r-plus-8,
-            .r-plus-9,
-            .t-minus-1,
-            .t-minus-10,
-            .t-minus-2,
-            .t-minus-3,
-            .t-minus-4,
-            .t-minus-5,
-            .t-minus-6,
-            .t-minus-7,
-            .t-minus-8,
-            .t-minus-9,
-            .t-plus-1,
-            .t-plus-10,
-            .t-plus-2,
-            .t-plus-3,
-            .t-plus-4,
-            .t-plus-5,
-            .t-plus-6,
-            .t-plus-7,
-            .t-plus-8,
-            .t-plus-9 {
-                position: relative !important
-            }
-
-            .profile-header .profile-header-tab {
-                background: #fff;
-                list-style-type: none;
-                margin: -10px 0 0;
-                padding: 0 0 0 140px;
-                white-space: nowrap;
-                border-radius: 0
-            }
-
-            .text-ellipsis,
-            .text-nowrap {
-                white-space: nowrap !important
-            }
-
-            .profile-header .profile-header-tab > li {
-                display: inline-block;
-                margin: 0
-            }
-
-                .profile-header .profile-header-tab > li > a {
-                    display: block;
-                    color: #929ba1;
-                    line-height: 20px;
-                    padding: 10px 20px;
-                    text-decoration: none;
-                    font-weight: 700;
-                    font-size: 12px;
-                    border: none
-                }
-
-                    .profile-header .profile-header-tab > li.active > a,
-                    .profile-header .profile-header-tab > li > a.active {
-                        color: #242a30
-                    }
-
-            .profile-content {
-                padding: 25px;
-                border-radius: 4px
-            }
-
-                .profile-content:after,
-                .profile-content:before {
-                    content: '';
-                    display: table;
-                    clear: both
-                }
-
-                .profile-content .tab-content,
-                .profile-content .tab-pane {
-                    background: 0 0
-                }
-
-            .profile-left {
-                width: 200px;
-                float: left
-            }
-
-            .profile-right {
-                margin-left: 240px;
-                padding-right: 20px
-            }
-
-            .profile-image {
-                height: 175px;
-                line-height: 175px;
-                text-align: center;
-                font-size: 72px;
-                margin-bottom: 10px;
-                border: 2px solid #E2E7EB;
-                overflow: hidden;
-                border-radius: 4px
-            }
-
-                .profile-image img {
-                    display: block;
-                    max-width: 100%
-                }
-
-            .profile-highlight {
-                padding: 12px 15px;
-                background: #FEFDE1;
-                border-radius: 4px
-            }
-
-                .profile-highlight h4 {
-                    margin: 0 0 7px;
-                    font-size: 12px;
-                    font-weight: 700
-                }
-
-            .table.table-profile > thead > tr > th {
-                border-bottom: none !important
-            }
-
-                .table.table-profile > thead > tr > th h4 {
-                    font-size: 20px;
-                    margin-top: 0
-                }
-
-                    .table.table-profile > thead > tr > th h4 small {
-                        display: block;
-                        font-size: 12px;
-                        font-weight: 400;
-                        margin-top: 5px
-                    }
-
-            .table.table-profile > tbody > tr > td,
-            .table.table-profile > thead > tr > th {
-                border: none;
-                padding-top: 7px;
-                padding-bottom: 7px;
-                color: #242a30;
-                background: 0 0
-            }
-
-                .table.table-profile > tbody > tr > td.field {
-                    width: 20%;
-                    text-align: right;
-                    font-weight: 600;
-                    color: #2d353c
-                }
-
-            .table.table-profile > tbody > tr.highlight > td {
-                border-top: 1px solid #b9c3ca;
-                border-bottom: 1px solid #b9c3ca
-            }
-
-            .table.table-profile > tbody > tr.divider > td {
-                padding: 0 !important;
-                height: 10px
-            }
-
-            .profile-section + .profile-section {
-                margin-top: 20px;
-                padding-top: 20px;
-                border-top: 1px solid #b9c3ca
-            }
-
-            .profile-section:after,
-            .profile-section:before {
-                content: '';
-                display: table;
-                clear: both
-            }
-
-            .profile-section .title {
-                font-size: 20px;
-                margin: 0 0 15px
-            }
-
-                .profile-section .title small {
-                    font-weight: 400
-                }
-
-            body.flat-black {
-                background: #E7E7E7
-            }
-
-            .flat-black .navbar.navbar-inverse {
-                background: #212121
-            }
-
-                .flat-black .navbar.navbar-inverse .navbar-form .form-control {
-                    background: #4a4a4a;
-                    border-color: #4a4a4a
-                }
-
-            .flat-black .sidebar,
-            .flat-black .sidebar-bg {
-                background: #3A3A3A
-            }
-
-            .flat-black .page-with-light-sidebar .sidebar,
-            .flat-black .page-with-light-sidebar .sidebar-bg {
-                background: #fff
-            }
-
-            .flat-black .sidebar .nav > li > a {
-                color: #b2b2b2
-            }
-
-            .flat-black .sidebar.sidebar-grid .nav > li > a {
-                border-bottom: 1px solid #474747;
-                border-top: 1px solid #474747
-            }
-
-            .flat-black .sidebar .active .sub-menu > li.active > a,
-            .flat-black .sidebar .nav > li.active > a,
-            .flat-black .sidebar .nav > li > a:focus,
-            .flat-black .sidebar .nav > li > a:hover,
-            .flat-black .sidebar .sub-menu > li > a:focus,
-            .flat-black .sidebar .sub-menu > li > a:hover,
-            .sidebar .nav > li.nav-profile > a {
-                color: #fff
-            }
-
-            .flat-black .sidebar .sub-menu > li > a,
-            .flat-black .sidebar .sub-menu > li > a:before {
-                color: #999
-            }
-
-            .flat-black .page-with-light-sidebar .sidebar .active .sub-menu > li.active > a,
-            .flat-black .page-with-light-sidebar .sidebar .active .sub-menu > li.active > a:focus,
-            .flat-black .page-with-light-sidebar .sidebar .active .sub-menu > li.active > a:hover,
-            .flat-black .page-with-light-sidebar .sidebar .nav > li.active > a,
-            .flat-black .page-with-light-sidebar .sidebar .nav > li.active > a:focus,
-            .flat-black .page-with-light-sidebar .sidebar .nav > li.active > a:hover {
-                color: #000
-            }
-
-            .flat-black .page-sidebar-minified .sidebar .nav > li.has-sub:focus > a,
-            .flat-black .page-sidebar-minified .sidebar .nav > li.has-sub:hover > a {
-                background: #323232
-            }
-
-            .flat-black .page-sidebar-minified .sidebar .nav li.has-sub > .sub-menu,
-            .flat-black .sidebar .nav > li.active > a,
-            .flat-black .sidebar .nav > li.active > a:focus,
-            .flat-black .sidebar .nav > li.active > a:hover,
-            .flat-black .sidebar .nav > li.nav-profile,
-            .flat-black .sidebar .sub-menu > li.has-sub > a:before,
-            .flat-black .sidebar .sub-menu > li:before,
-            .flat-black .sidebar .sub-menu > li > a:after {
-                background: #2A2A2A
-            }
-
-            .flat-black .page-sidebar-minified .sidebar .sub-menu > li:before,
-            .flat-black .page-sidebar-minified .sidebar .sub-menu > li > a:after {
-                background: #3e3e3e
-            }
-
-            .flat-black .sidebar .nav > li.nav-profile .cover.with-shadow:before {
-                background: rgba(42, 42, 42, .75)
-            }
-
-            .bg-white {
-                background-color: #fff !important;
-            }
-
-            .p-10 {
-                padding: 10px !important;
-            }
-
-            .media.media-xs .media-object {
-                width: 32px;
-            }
-
-            .m-b-2 {
-                margin-bottom: 2px !important;
-            }
-
-            .media > .media-left, .media > .pull-left {
-                padding-right: 15px;
-            }
-
-            .media-body, .media-left, .media-right {
-                display: table-cell;
-                vertical-align: top;
-            }
-
-            select.form-control:not([size]):not([multiple]) {
-                height: 34px;
-            }
-
-            .form-control.input-inline {
-                display: inline;
-                width: auto;
-                padding: 0 7px;
-            }
-
-
-            .timeline {
-                list-style-type: none;
-                margin: 0;
-                padding: 0;
-                position: relative
-            }
-
-                .timeline:before {
-                    content: '';
-                    position: absolute;
-                    top: 5px;
-                    bottom: 5px;
-                    width: 5px;
-                    background: #2d353c;
-                    left: 20%;
-                    margin-left: -2.5px
-                }
-
-                .timeline > li {
-                    position: relative;
-                    min-height: 50px;
-                    padding: 20px 0
-                }
-
-                .timeline .timeline-time {
-                    position: absolute;
-                    left: 0;
-                    width: 18%;
-                    text-align: right;
-                    top: 30px
-                }
-
-                    .timeline .timeline-time .date,
-                    .timeline .timeline-time .time {
-                        display: block;
-                        font-weight: 600
-                    }
-
-                    .timeline .timeline-time .date {
-                        line-height: 16px;
-                        font-size: 12px
-                    }
-
-                    .timeline .timeline-time .time {
-                        line-height: 24px;
-                        font-size: 20px;
-                        color: #242a30
-                    }
-
-                .timeline .timeline-icon {
-                    left: 15%;
-                    position: absolute;
-                    width: 10%;
-                    text-align: center;
-                    top: 40px
-                }
-
-                    .timeline .timeline-icon a {
-                        text-decoration: none;
-                        width: 20px;
-                        height: 20px;
-                        display: inline-block;
-                        border-radius: 20px;
-                        background: #d9e0e7;
-                        line-height: 10px;
-                        color: #fff;
-                        font-size: 14px;
-                        border: 5px solid #2d353c;
-                        transition: border-color .2s linear
-                    }
-
-                .timeline .timeline-body {
-                    margin-left: 23%;
-                    margin-right: 17%;
-                    background: #fff;
-                    position: relative;
-                    padding: 20px 25px;
-                    border-radius: 6px
-                }
-
-                    .timeline .timeline-body:before {
-                        content: '';
-                        display: block;
-                        position: absolute;
-                        border: 10px solid transparent;
-                        border-right-color: #fff;
-                        left: -20px;
-                        top: 20px
-                    }
-
-                    .timeline .timeline-body > div + div {
-                        margin-top: 15px
-                    }
-
-                        .timeline .timeline-body > div + div:last-child {
-                            margin-bottom: -20px;
-                            padding-bottom: 20px;
-                            border-radius: 0 0 6px 6px
-                        }
-
-            .timeline-header {
-                padding-bottom: 10px;
-                border-bottom: 1px solid #e2e7eb;
-                line-height: 30px
-            }
-
-                .timeline-header .userimage {
-                    float: left;
-                    width: 34px;
-                    height: 34px;
-                    border-radius: 40px;
-                    overflow: hidden;
-                    margin: -2px 10px -2px 0
-                }
-
-                .timeline-header .username {
-                    font-size: 16px;
-                    font-weight: 600
-                }
-
-                    .timeline-header .username,
-                    .timeline-header .username a {
-                        color: #2d353c
-                    }
-
-            .timeline img {
-                max-width: 100%;
-                display: block
-            }
-
-            .timeline-content {
-                letter-spacing: .25px;
-                line-height: 18px;
-                font-size: 13px
-            }
-
-                .timeline-content:after,
-                .timeline-content:before {
-                    content: '';
-                    display: table;
-                    clear: both
-                }
-
-            .timeline-title {
-                margin-top: 0
-            }
-
-            .timeline-footer {
-                background: #fff;
-                border-top: 1px solid #e2e7ec;
-                padding-top: 15px
-            }
-
-                .timeline-footer a:not(.btn) {
-                    color: #575d63
-                }
-
-                    .timeline-footer a:not(.btn):focus,
-                    .timeline-footer a:not(.btn):hover {
-                        color: #2d353c
-                    }
-
-            .timeline-likes {
-                color: #6d767f;
-                font-weight: 600;
-                font-size: 12px
-            }
-
-                .timeline-likes .stats-right {
-                    float: right
-                }
-
-                .timeline-likes .stats-total {
-                    display: inline-block;
-                    line-height: 20px
-                }
-
-                .timeline-likes .stats-icon {
-                    float: left;
-                    margin-right: 5px;
-                    font-size: 9px
-                }
-
-                    .timeline-likes .stats-icon + .stats-icon {
-                        margin-left: -2px
-                    }
-
-                .timeline-likes .stats-text {
-                    line-height: 20px
-                }
-
-                    .timeline-likes .stats-text + .stats-text {
-                        margin-left: 15px
-                    }
-
-            .timeline-comment-box {
-                background: #f2f3f4;
-                margin-left: -25px;
-                margin-right: -25px;
-                padding: 20px 25px
-            }
-
-                .timeline-comment-box .user {
-                    float: left;
-                    width: 34px;
-                    height: 34px;
-                    overflow: hidden;
-                    border-radius: 30px
-                }
-
-                    .timeline-comment-box .user img {
-                        max-width: 100%;
-                        max-height: 100%
-                    }
-
-                    .timeline-comment-box .user + .input {
-                        margin-left: 44px
-                    }
-
-            .lead {
-                margin-bottom: 20px;
-                font-size: 21px;
-                font-weight: 300;
-                line-height: 1.4;
-            }
-
-            .text-danger, .text-red {
-                color: #ff5b57 !important;
-            }
-        </style>
-
-        <script type="text/javascript"></script>
-    </body>
+</body>
 </html>
