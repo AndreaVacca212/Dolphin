@@ -34,7 +34,6 @@ namespace Dolphin.Controllers
             else
                 return Content("Modifica Fallita");
         }
-
         public IActionResult EliminaPost(int id)
         {
             if (DAOPost.GetInstance().Delete(id))

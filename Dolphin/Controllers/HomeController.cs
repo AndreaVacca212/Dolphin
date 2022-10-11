@@ -24,6 +24,7 @@ namespace Dolphin.Controllers
             il = l;
         }
 
+
         public IActionResult Valida(Dictionary<string, string> parametri)
         {
             if (DAOUtente.GetInstance().Valida(parametri["email"], parametri["pass"]))
