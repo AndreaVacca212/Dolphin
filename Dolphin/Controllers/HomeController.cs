@@ -75,7 +75,11 @@ namespace Dolphin.Controllers
 
             return RedirectToAction("Index","Home");
         }
-    
+
+        public IActionResult UserList()
+        {
+            return View(DAOUtente.GetInstance().Read());
+        }
 
         // GET: /<controller>/
         public IActionResult Index()
