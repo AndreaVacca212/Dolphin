@@ -30,7 +30,7 @@
             <div class="container">
                 <div class="header-data">
                     <div class="logo">
-                        <a href="index.html" title=""><img src="~/img/Logo Progetto 5.jpg" alt=""></a>
+                        <a href="index.html" title=""><img src="~/img/Logo Progetto 5.jpg" style="border-radius: 50%;"alt=""></a>
                     </div><!--logo end-->
                     <div class="search-bar">
                         <form>
@@ -105,35 +105,18 @@
             </div>
         </header><!--header end-->
 
-        <main>
-            <div class="main-section content">
+        <main class="content">
+            <div class="main-section">
                 <div class="container">
                     <div class="main-section-data">
                         <div class="row">
                             <div class="col-lg-3 col-md-4 pd-left-none no-pd">
-                                <div class="main-left-sidebar no-margin">
-                                    <div class="user-data full-width">
-                                        <div class="user-profile">
-                                            <div class="username-dt">
-                                                <div class="usr-pic">
-                                                    <img src="@HomeController.utenteLoggato.FotoProfilo" style="width:100px; heigt:100px;" alt="">
-                                                </div>
-                                            </div><!--username-dt end-->
-                                            <div class="user-specs">
-                                                <h3>@HomeController.utenteLoggato.Nome @HomeController.utenteLoggato.Cognome</h3>
-                                                <span>@HomeController.utenteLoggato.Email</span>
-                                            </div>
-                                        </div><!--user-profile end-->
-                                        <ul class="user-fw-status">
-                                            <li>
-                                                <h4>Amici</h4>
-                                                <span>@(DAOAmicizia.GetInstance().ReadAmicizia(HomeController.utenteLoggato.Id).Count)</span>
-                                            </li>
-                                            <li>
-                                                <a href="my-profile.html" title="">Vedi Profilo</a>
-                                            </li>
-                                        </ul>
-                                    </div><!--user-data end-->
+                                <div class="main-left-sidebar no-margin" id="imageID">
+                                    <div class="widget widget-about">
+                                        <img src="~/img/Logo Progetto 5.jpg" alt="">
+                                        <h3>Dolphin</h3>
+
+                                    </div><!--widget-about end-->
                                     <div class="tags-sec full-width">
                                         <ul>
                                             <li><a href="#" title="">Help Center</a></li>
@@ -294,11 +277,29 @@
                             </div>
                             <div class="col-lg-3 pd-right-none no-pd">
                                 <div class="right-sidebar">
-                                    <div class="widget widget-about">
-                                        <img src="~/img/Logo Progetto 5.jpg" alt="">
-                                        <h3>Dolphin</h3>
+                                    <div class="user-data full-width">
+                                        <div class="user-profile">
+                                            <div class="username-dt">
+                                                <div class="usr-pic">
+                                                    <img src="@HomeController.utenteLoggato.FotoProfilo" style="width:100px; heigt:100px;" alt="">
+                                                </div>
+                                            </div><!--username-dt end-->
+                                            <div class="user-specs">
+                                                <h3>@HomeController.utenteLoggato.Nome @HomeController.utenteLoggato.Cognome</h3>
+                                                <span>@HomeController.utenteLoggato.Email</span>
+                                            </div>
+                                        </div><!--user-profile end-->
+                                        <ul class="user-fw-status">
+                                            <li>
+                                                <h4>Amici</h4>
+                                                <span>@(DAOAmicizia.GetInstance().ReadAmicizia(HomeController.utenteLoggato.Id).Count)</span>
+                                            </li>
+                                            <li>
+                                                <a href="my-profile.html" title="">Vedi Profilo</a>
+                                            </li>
+                                        </ul>
+                                    </div><!--user-data end-->
 
-                                    </div><!--widget-about end-->
 
                                 </div>
                             </div>
@@ -428,13 +429,16 @@
     <script>window.onscroll = function () { myFunction() };
 
         var header = document.getElementById("myHeader");
+        var image = document.getElementById("imageID");
         var sticky = header.offsetTop;
 
         function myFunction() {
             if (window.pageYOffset > sticky) {
                 header.classList.add("sticky");
+                image.classList.add("sticky2");
             } else {
                 header.classList.remove("sticky");
+                image.classList.remove("sticky2");
             }
         }</script>
 </body>

@@ -64,7 +64,11 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
-
+header {
+	position: fixed;
+	top: 0;
+	width: 100;
+}
 #navbar {
 	overflow: hidden;
 	background-color:#3b5998;
@@ -80,6 +84,14 @@ time, mark, audio, video {
 	position: fixed;
 	top: 0;
 	width: 100%;
+	z-index: 100;
+}
+
+.sticky2 {
+	position: fixed;
+	top: 30;
+
+	z-index: 100;
 }
 .content {
 	padding: 16px;
