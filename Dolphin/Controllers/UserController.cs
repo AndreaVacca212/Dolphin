@@ -52,6 +52,47 @@ namespace Dolphin.Controllers
             else
                 return Content("Inserimento fallito");
         }
+
+        public IActionResult RichiediAmicizia(int idRichiedente, int idAccettante)
+        {
+            if (DAORichiestaAmicizia.GetInstance().Insert(idRichiedente, idAccettante))
+                return RedirectToAction("UserAccount", "User");
+            else
+                return Content("Richiesta fallita");
+        }
+
+        public IActionResult AccettaRichiestaAmicizia(int idRichiesta, int idRichiedente, int idAccettante)
+        {
+
+            if (DAOAmicizia.GetInstance().Insert(idRichiedente, idAccettante) && DAOAmicizia.GetInstance().Insert(idAccettante, idRichiedente))
+            {
+                if (DAORichiestaAmicizia.GetInstance().Delete(idRichiesta))
+                {
+                    return RedirectToAction("UserAccount", "User");
+
+                }
+                else
+                {
+                    return Content("Ops qualcosa è andato storto 1");
+                }
+            }
+            else
+            {
+                return Content("Ops qualcosa è andato storto");
+            }
+        }
+       
+        public IActionResult RifiutaRichiestaAmicizia(int idRichiesta)
+        {
+            if (DAORichiestaAmicizia.GetInstance().Delete(idRichiesta))
+            {
+                return RedirectToAction("UserAccount", "User");
+            }
+            else
+            {
+                return Content("Ops qualcosa è andato storto");
+            }
+        }
     }
 }
 

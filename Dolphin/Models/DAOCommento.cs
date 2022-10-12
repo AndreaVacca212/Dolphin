@@ -66,6 +66,49 @@ namespace Dolphin.Models
                             );
         }
 
+        public List<Commento> ListaCommenti(int id)
+        {
+            List<Commento> ris = new List<Commento>();
+
+
+            List<Dictionary<string, string>> tabella = db.Read($"select Utenti.nome as nomeCommento, Utenti.cognome as cognomeCommento, Commenti.contenutoCommento, Commenti.id as idcommento, posts.id as idPost " +
+                                                               $"from Commenti inner join Posts on Commenti.idPost = Posts.id inner join Utenti on Utenti.id = Commenti.idUtente " +
+                                                               $" where Commenti.idPost = {id} ");
+
+            foreach (Dictionary<string, string> riga in tabella)
+            {
+                Commento a = new Commento();
+
+                a.FromDictionary(riga);
+
+
+                ris.Add(a);
+
+            }
+
+            return ris;
+        }
+
+        public List<Entity> ReadCommenti(int id)
+        {
+            List<Entity> ris = new List<Entity>();
+
+            List<Dictionary<string, string>> tabella = db.Read($"SELECT Utenti.nome, utenti.cognome,Utenti.fotoProfilo, Commenti.contenutoCommento, Commenti.data_ora FROM Commenti INNER JOIN Utenti on Utenti.id = Commenti.idUtente WHERE Commenti.idPost = {id}; ");
+
+            foreach (Dictionary<string, string> riga in tabella)
+            {
+                Commento a = new Commento();
+
+                a.FromDictionary(riga);
+
+
+                ris.Add(a);
+
+            }
+            return ris;
+
+        }
+
         public Entity Find(int id)
         {
             foreach (Entity e in Read())

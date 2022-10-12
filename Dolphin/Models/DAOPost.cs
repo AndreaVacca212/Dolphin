@@ -52,6 +52,7 @@ namespace Dolphin.Models
 
                 ris.Add(a);
                 a.MiPiacePosts = (DAOPost.GetInstance().ReadLikes(a.Id));
+                a.ListaCommenti = (DAOCommento.GetInstance().ListaCommenti(a.Id));
             }
 
             return ris;

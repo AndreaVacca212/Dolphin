@@ -82,6 +82,42 @@ namespace Dolphin.Controllers
             return View(DAOUtente.GetInstance().Read());
         }
 
+
+
+        public IActionResult AccettaRichiestaAmicizia(int idRichiesta, int idRichiedente, int idAccettante)
+        {
+
+            if (DAOAmicizia.GetInstance().Insert(idRichiedente, idAccettante) && DAOAmicizia.GetInstance().Insert(idAccettante, idRichiedente))
+            {
+                if (DAORichiestaAmicizia.GetInstance().Delete(idRichiesta))
+                {
+                    return RedirectToAction("Bacheca", "Home");
+
+                } else
+                {
+                    return Content("Ops qualcosa è andato storto 1");
+                }
+            }
+            else
+            {
+                return Content("Ops qualcosa è andato storto");
+            }
+        }
+
+        public IActionResult RifiutaRichiestaAmicizia(int idRichiesta)
+        {
+            if (DAORichiestaAmicizia.GetInstance().Delete(idRichiesta))
+            {
+                return RedirectToAction("Bacheca", "Home");
+            }
+            else
+            {
+                return Content("Ops non sono riuscito a cancellare");
+            }
+        }
+
+
+
         // GET: /<controller>/
         public IActionResult Index()
         {

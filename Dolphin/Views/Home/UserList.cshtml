@@ -29,7 +29,7 @@
             <div class="container">
                 <div class="header-data">
                     <div class="logo">
-                        <a href="index.html" title=""><img src="~/img/logo.png" alt=""></a>
+                        <a href="index.html" title=""><img src="~/img/Logo Progetto 5.jpg" alt=""></a>
                     </div><!--logo end-->
                     <div class="search-bar">
                         <form>
@@ -139,15 +139,18 @@
                     <div class="companies-list">
                         <div class="row">
                             @foreach (var p in Model)
-                            {
+                                {
                                 <div class="col-lg-3 col-md-4 col-sm-6">
                                     <div class="company_profile_info">
                                         <div class="company-up-info">
                                             <img src="@(((Utente)p).FotoProfilo)" style="width:90px; height:90px;" alt="">
                                             <h3>@(((Utente)p).Nome) @(((Utente)p).Cognome)</h3>
-                                            <h4>Establish Feb, 2004</h4>
                                             <ul>
-                                                <li><a href="#" title="" class="follow">Segui</a></li>
+                                                @if ((DAOAmicizia.GetInstance().LeggiAmicizia(HomeController.utenteLoggato.Id).Contains((p.Id))))
+                                                    {
+                                                        <li><a href="#" title="" class="follow">Invia Richiesta</a></li>
+                                                     }
+                                                
                                             </ul>
                                         </div>
                                         <a href="/Profilo/User/@(((Utente)p).Id)" title="" class="view-more-pro">Vedi Profilo</a>

@@ -10,7 +10,9 @@ namespace Dolphin.Models
         public string FotoUtente { get; set; }
         public string ContenutoPost { get; set; }
         public DateTime Data_Ora { get; set; }
+        public string ContenutoCommento { get; set; }
         public int IdPost { get; set; }
+        public int IdCommento { get; set; }
        // public int MiPiace { get; set; }
 
         public Bacheca()

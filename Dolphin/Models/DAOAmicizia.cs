@@ -39,6 +39,22 @@ namespace Dolphin.Models
             return ris;
         }
 
+        public List<int> LeggiAmicizia(int id)
+        {
+            List<int> ris = new List<int>();
+
+            List<Dictionary<string, string>> tabella = db.Read($"select idUtente2 from Amicizie where idUtente={id}");
+
+            foreach (Dictionary<string, string> riga in tabella)
+            {
+                int a = 0;
+
+                ris.Add(a);
+            }
+
+            return ris;
+        }
+
         public List<Entity> ReadAmicizia(int id)
         {
             List<Entity> ris = new List<Entity>();
@@ -68,6 +84,15 @@ namespace Dolphin.Models
                              $"VALUES " +
                              $"({((Amicizia)e).IdUtente}, {((Amicizia)e).IdUtente2})");
            
+        }
+
+        public bool Insert(int idRichiedente, int idAccettante)
+        {
+            return db.Send($"INSERT INTO Amicizie " +
+                             $"(idUtente, idUtente2) " +
+                             $"VALUES " +
+                             $"({idRichiedente}, {idAccettante});");
+
         }
 
         public bool Send(Entity e)

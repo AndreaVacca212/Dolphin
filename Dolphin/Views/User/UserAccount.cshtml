@@ -30,7 +30,7 @@
             <div class="container">
                 <div class="header-data">
                     <div class="logo">
-                        <a href="index.html" title=""><img src="~/img/logo.png" alt=""></a>
+                        <a href="index.html" title=""><img src="~/img/Logo Progetto 5.jpg" alt=""></a>
                     </div><!--logo end-->
                     <div class="search-bar">
                         <form>
@@ -52,59 +52,31 @@
                                     Lista Utenti
                                 </a>
                             </li>
-                            <!--<li>
-        <a href="#" title="" class="not-box-open">
-            <span><img src="~/img/icon7.png" alt=""></span>
-            Notification
-        </a>
-        <div class="notification-box noti" id="notification">
-            <div class="nt-title">
-                <h4>Setting</h4>
-                <a href="#" title="">Clear all</a>
-            </div>
-            <div class="nott-list">
-                <div class="notfication-details">
-                    <div class="noty-user-img">
-                        <img src="~/img/resources/ny-img1.png" alt="">
-                    </div>
-                    <div class="notification-info">
-                        <h3><a href="#" title="">Jassica William</a> Comment on your project.</h3>
-                        <span>2 min ago</span>
-                    </div>notification-info
-                </div>
-                <div class="notfication-details">
-                    <div class="noty-user-img">
-                        <img src="~/img/resources/ny-img2.png" alt="">
-                    </div>
-                    <div class="notification-info">
-                        <h3><a href="#" title="">Jassica William</a> Comment on your project.</h3>
-                        <span>2 min ago</span>
-                    </div>notification-info
-                </div>
-                <div class="notfication-details">
-                    <div class="noty-user-img">
-                        <img src="~/img/resources/ny-img3.png" alt="">
-                    </div>
-                    <div class="notification-info">
-                        <h3><a href="#" title="">Jassica William</a> Comment on your project.</h3>
-                        <span>2 min ago</span>
-                    </div>notification-info
-                </div>
-                <div class="notfication-details">
-                    <div class="noty-user-img">
-                        <img src="~/img/resources/ny-img2.png" alt="">
-                    </div>
-                    <div class="notification-info">
-                        <h3><a href="#" title="">Jassica William</a> Comment on your project.</h3>
-                        <span>2 min ago</span>
-                    </div>notification-info
-                </div>
-                <div class="view-all-nots">
-                    <a href="#" title="">View All Notification</a>
-                </div>
-            </div>nott-list end
-        </div>notification-box end
-    </li> -->
+                            <li>
+                                <a href="#" title="" class="not-box-open">
+                                    <span><img src="~/img/icon7.png" alt=""></span>
+                                    Notifiche
+                                </a>
+                                @foreach (var e in DAORichiestaAmicizia.GetInstance().ReadRichiestaAmicizia(HomeController.utenteLoggato.Id))
+                                {
+                                    <div class="notification-box noti" id="notification">
+                                        <div class="nott-list">
+                                            <div class="notfication-details">
+                                                <div class="noty-user-img">
+                                                    <img src="@(((RichiestaAmicizia)e).FotoProfilo)" alt="">
+                                                </div>
+                                                <div class="notification-info">
+                                                    <h3><a title="">@(((RichiestaAmicizia)e).Nome) @(((RichiestaAmicizia)e).Cognome) </a>Ti ha inviato una richiesta di amicizia</h3>
+                                                </div>
+                                                <div>
+                                                    <a href="/Home/AccettaRichiestaAmicizia/?idRichiesta=@(((RichiestaAmicizia)e).Id)&idRichiedente=@(((RichiestaAmicizia)e).IdRichiedente)&idAccettante=@(HomeController.utenteLoggato.Id)" title="" class="follow">Accetta</a>
+                                                    <a href="/Home/RifiutaRichiestaAmicizia/idRichiesta=@(((RichiestaAmicizia)e).Id)" title="" class="danger" style="background-color:red;">Rifiuta</a><!--vedere come cambiare colore in rosso-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </li>
                         </ul>
                     </nav><!--nav end-->
                     <div class="menu-btn">

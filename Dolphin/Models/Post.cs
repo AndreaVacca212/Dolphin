@@ -8,6 +8,7 @@ namespace Dolphin.Models
         public DateTime Data_Ora { get; set; }
         public int IdUtente { get; set; }
         public List<Entity>? MiPiacePosts { get; set; }
+        public List<Commento>? ListaCommenti { get; set; }
         public Post ()
         {
         }
