@@ -44,7 +44,6 @@ create table Commenti
 	idUtente int,
 	contenutoCommento varchar(800),
 	data_ora datetime,
-	miPiace int,
 	foreign key (idUtente) references Utenti(id)
 	on update no action
 	on delete no action,
@@ -52,6 +51,9 @@ create table Commenti
 	on update no action
 	on delete no action
 );
+
+insert into Commenti(idPost,idUtente,contenutoCommento,data_ora)
+VALUES(3,2,'Prova primo commento', GETDATE());
 
 
 create table MiPiacePosts
@@ -103,8 +105,16 @@ Amicizie INNER JOIN Utenti on Utenti.id = Amicizie.idUtente
 INNER JOIN Amicizie AS Amicizie2 on Amicizie2.idUtente2 = Utenti.id
 where Utenti.id = 1 or Amicizie2.idUtente = 1;*/
 
-select * from Posts
+select * from Commenti
 where id=6;
+
+
+
+INSERT INTO Commenti
+(idPost,idUtente,contenutoCommento,data_ora)
+VALUES
+(3,4,'Ciao bella',GETDATE());
+
 
 select * from utentiView
 
@@ -122,7 +132,7 @@ SELECT Utenti.id, Utenti.nome, Utenti.cognome, Utenti.fotoprofilo
 FROM Utenti
 go
 
-select * from Posts
+select * from Amicizie
 
 SELECT Utenti2.id, Utenti2.nome, Utenti2.cognome, Utenti2.fotoProfilo, Posts.contenutoPost
 FROM Utenti 
@@ -165,13 +175,14 @@ select utenti.nome as nomeUtente ,utenti.cognome as cognomeUtente,utenti.id as i
 from Amicizie inner join Utenti on Amicizie.idUtente=Utenti.id or Amicizie.idUtente2 = Utenti.id
 
 go
-select distinct Amici.nomeUtente, amici.cognomeUtente, Posts.contenutopost, Posts.data_ora, amici.fotoutente, posts.id as idPost
+select distinct Amici.nomeUtente, amici.cognomeUtente, Posts.contenutopost, Posts.data_ora, amici.fotoutente, posts.id as idPost, Commenti.id as idCommento, Commenti.contenutoCommento
 from Posts
 left join MiPiacePosts on posts.id = MiPiacePosts.idPost
 inner join Amici on Posts.idUtente=Amici.idAmicoLato1 or Posts.idUtente = Amici.idAmicoLato2
-where (Amici.idAmicoLato1=3 or Amici.idAmicoLato2=3) and Posts.idUtente != 3 and (Amici.idUtente != 3);
+full join Commenti on Commenti.idPost = Posts.id
+where (Amici.idAmicoLato1=4 or Amici.idAmicoLato2=4) and Posts.idUtente != 4 and (Amici.idUtente != 4);
 
-select * from amici
+select * from Posts
 
 UPDATE Posts 
 SET miPiace=miPiace+1
@@ -202,5 +213,46 @@ VALUES
 (15,3),
 (1002,4)
 
-select * from MiPiacePosts
+select * from RichiesteAmicizia
 where idPost = 8
+
+create table RichiesteAmicizia
+(
+    id int primary key identity(1,1),
+    idRichiedente int,
+    foreign key (idRichiedente) references Utenti(id)
+    on update no action
+    on delete no action,
+    idRicevente int,
+    foreign key (idRicevente) references Utenti(id)
+    on update no action
+    on delete no action
+);
+
+insert into RichiesteAmicizia
+(idRichiedente,idRicevente)
+VALUES
+(3,4)
+
+select Utenti.nome as nomeCommento, Utenti.cognome as cognomeCommento, Commenti.contenutoCommento, Commenti.id as idcommento, posts.id as idPost
+from Commenti inner join Posts on Commenti.idPost = Posts.id
+inner join Utenti on Utenti.id = Commenti.idUtente
+
+select * from RichiesteAmicizia
+
+delete from RichiesteAmicizia where id=2
+
+select idUtente2 from Amicizie
+where idUtente=1
+
+delete from RichiesteAmicizia where id = 1
+
+delete from Amicizie
+where id = 1006
+
+
+SELECT Utenti.nome, utenti.cognome, Commenti.contenutoCommento, Commenti.data_ora
+FROM Commenti
+INNER JOIN Utenti on Utenti.id = Commenti.idUtente
+where Commenti.idPost = 
+
