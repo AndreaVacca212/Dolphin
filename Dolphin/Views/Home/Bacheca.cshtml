@@ -26,7 +26,7 @@
 <body>
 
     <div class="wrapper">
-        <header>
+        <header id="myHeader" style=" position: sticky; ">
             <div class="container">
                 <div class="header-data">
                     <div class="logo">
@@ -64,24 +64,24 @@
                                     }
                                 </a>
                                 @foreach (var e in DAORichiestaAmicizia.GetInstance().ReadRichiestaAmicizia(HomeController.utenteLoggato.Id))
-                                    {
-                                <div class="notification-box noti" id="notification">
-                                    <div class="nott-list">
-                                        <div class="notfication-details">
-                                            <div class="noty-user-img">
-                                                <img src="@(((RichiestaAmicizia)e).FotoProfilo)" alt="">
-                                            </div>
-                                            <div class="notification-info">
-                                                <h3><a title="">@(((RichiestaAmicizia)e).Nome) @(((RichiestaAmicizia)e).Cognome) </a>Ti ha inviato una richiesta di amicizia</h3>
-                                            </div>
-                                            <div>
-                                                <a href="/Home/AccettaRichiestaAmicizia/?idRichiesta=@(((RichiestaAmicizia)e).Id)&idRichiedente=@(((RichiestaAmicizia)e).IdRichiedente)&idAccettante=@(HomeController.utenteLoggato.Id)" title="" class="follow">Accetta</a>
-                                                <a href="/Home/RifiutaRichiestaAmicizia/?idRichiesta=@(((RichiestaAmicizia)e).Id)" title="" class="danger" style="background-color:red;">Rifiuta</a><!--vedere come cambiare colore in rosso-->
+                                {
+                                    <div class="notification-box noti" id="notification">
+                                        <div class="nott-list">
+                                            <div class="notfication-details">
+                                                <div class="noty-user-img">
+                                                    <img src="@(((RichiestaAmicizia)e).FotoProfilo)" alt="">
+                                                </div>
+                                                <div class="notification-info">
+                                                    <h3><a title="">@(((RichiestaAmicizia)e).Nome) @(((RichiestaAmicizia)e).Cognome) </a>Ti ha inviato una richiesta di amicizia</h3>
+                                                </div>
+                                                <div>
+                                                    <a href="/Home/AccettaRichiestaAmicizia/?idRichiesta=@(((RichiestaAmicizia)e).Id)&idRichiedente=@(((RichiestaAmicizia)e).IdRichiedente)&idAccettante=@(HomeController.utenteLoggato.Id)" title="" class="follow">Accetta</a>
+                                                    <a href="/Home/RifiutaRichiestaAmicizia/?idRichiesta=@(((RichiestaAmicizia)e).Id)" title="" class="danger" style="background-color:red;">Rifiuta</a><!--vedere come cambiare colore in rosso-->
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                    }
+                                }
                             </li>
                         </ul>
                     </nav><!--nav end-->
@@ -106,7 +106,7 @@
         </header><!--header end-->
 
         <main>
-            <div class="main-section">
+            <div class="main-section content">
                 <div class="container">
                     <div class="main-section-data">
                         <div class="row">
@@ -200,14 +200,13 @@
                                                 <div class="comment-section">
                                                     <div class="comment-sec">
 
-
                                                         @foreach (var g in DAOCommento.GetInstance().ReadCommenti((((Bacheca)p).IdPost)))
                                                         {
                                                             <ul>
                                                                 <li>
                                                                     <div class="comment-list">
                                                                         <div class="bg-img">
-                                                                            <img src="@(((Commento)g).FotoProfilo)" alt="">
+                                                                            <img src="@(((Commento)g).FotoProfilo)" style="width:50px; height:50px;" alt="">
                                                                         </div>
                                                                         <div class="comment">
                                                                             <h3>@(((Commento)g).Nome) @(((Commento)g).Cognome) </h3>
@@ -219,14 +218,16 @@
                                                             </ul>
                                                         }
                                                     </div><!--comment-sec end-->
-
                                                     <div class="post-comment">
                                                         <div class="cm_img">
-                                                            <img src="@HomeController.utenteLoggato.FotoProfilo" alt="">
+                                                            <img src="@(HomeController.utenteLoggato.FotoProfilo)" alt="">
                                                         </div>
                                                         <div class="comment_box">
-                                                            <form>
-                                                                <input type="text" placeholder="Scrivi un commento">
+                                                            <form action="/User/InserisciCommento/">
+                                                                <input type="hidden" name="idpost" value="@(((Bacheca)p).IdPost)" />
+                                                                <input type="hidden" name="idutente" value="@(HomeController.utenteLoggato.Id)" />
+                                                                <input type="hidden" name="data_ora" value="2022-10-06 10:57:00" />
+                                                                <input type="text" name="contenutocommento" placeholder="Scrivi un commento">
                                                                 <button type="submit">Invia</button>
                                                             </form>
                                                         </div>
@@ -425,5 +426,17 @@
     <script type="text/javascript" src="~/js/scrollbar.js"></script>
     <script type="text/javascript" src="~/js/script.js"></script>
 
+    <script>window.onscroll = function () { myFunction() };
+
+        var header = document.getElementById("myHeader");
+        var sticky = header.offsetTop;
+
+        function myFunction() {
+            if (window.pageYOffset > sticky) {
+                header.classList.add("sticky");
+            } else {
+                header.classList.remove("sticky");
+            }
+        }</script>
 </body>
 </html>

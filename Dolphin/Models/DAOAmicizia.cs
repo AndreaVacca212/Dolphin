@@ -39,15 +39,16 @@ namespace Dolphin.Models
             return ris;
         }
 
-        public List<int> LeggiAmicizia(int id)
+        public List<Entity> LeggiAmicizia(int id)
         {
-            List<int> ris = new List<int>();
+            List<Entity> ris = new List<Entity>();
 
             List<Dictionary<string, string>> tabella = db.Read($"select idUtente2 from Amicizie where idUtente={id}");
-
+  
             foreach (Dictionary<string, string> riga in tabella)
             {
-                int a = 0;
+                Amicizia a = new Amicizia();
+                a.FromDictionary(riga);
 
                 ris.Add(a);
             }

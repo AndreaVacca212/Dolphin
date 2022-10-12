@@ -24,6 +24,11 @@ namespace Dolphin.Controllers
             return View(DAOUtente.GetInstance().Cerca(id));
         }
 
+        public IActionResult ModificaProfilo2(int id)
+        {
+            return View(DAOUtente.GetInstance().Cerca(id));
+        }
+
         public IActionResult ModificaUtente(Dictionary<string, string> parametri)
         {
             Utente user = new Utente();
@@ -49,6 +54,17 @@ namespace Dolphin.Controllers
 
             if (DAOPost.GetInstance().Insert(post))
                 return RedirectToAction("UserAccount", "User");
+            else
+                return Content("Inserimento fallito");
+        }
+
+        public IActionResult InserisciCommento(Dictionary<string, string> parametri)
+        {
+            Commento c = new Commento();
+            c.FromDictionary(parametri);
+
+            if (DAOCommento.GetInstance().Insert(c))
+                return RedirectToAction("Bacheca", "Home");
             else
                 return Content("Inserimento fallito");
         }

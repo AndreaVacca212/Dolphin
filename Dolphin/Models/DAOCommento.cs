@@ -45,11 +45,10 @@ namespace Dolphin.Models
             Commento commento = (Commento)e;
 
             return db.Send($"INSERT INTO Commenti " +
-                             $"(idPost, idUtente, contenutoCommento, data_ora, miPiace  ) " +
+                             $"(idPost, idUtente, contenutoCommento, data_ora  ) " +
                              $"VALUES " +
                              $"({commento.IdPost}, {commento.IdUtente}, " +
-                             $"'{commento.ContenutoCommento}', '{commento.Data_Ora}', " +
-                             $"{commento.MiPiace})");   
+                             $"'{commento.ContenutoCommento}', GETDATE()); ");   
         }
 
         public bool Send(Entity e)

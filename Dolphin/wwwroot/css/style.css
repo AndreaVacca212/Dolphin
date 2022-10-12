@@ -64,6 +64,30 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
+
+#navbar {
+	overflow: hidden;
+	background-color:#3b5998;
+}
+
+#navbar a {
+	float: left;
+	display: block;
+	text-align: center;
+	text-decoration: none;
+	}
+
+.sticky {
+	position: fixed;
+	top: 0;
+	width: 100%;
+}
+.content {
+	padding: 16px;
+}
+.sticky + .content {
+		padding-top: 60px;
+	}
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
@@ -1625,11 +1649,11 @@ main {
 	padding-left: 50px;
 }
 .comment-list {
-	display: table;
+	/*display: table;*/
 	padding-bottom: 30px;
 }
 .bg-img {
-	display: table-cell;
+	/*display: table-cell;*/
 }
 .bg-img img {
 	-webkit-border-radius: 100px;
