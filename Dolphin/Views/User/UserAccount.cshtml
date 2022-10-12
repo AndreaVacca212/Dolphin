@@ -14,7 +14,7 @@
     <link rel="stylesheet" type="text/css" href="~/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="~/css/line-awesome.css">
     <link rel="stylesheet" type="text/css" href="~/css/line-awesome-font-awesome.min.css">
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="~/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="~/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="~/css/jquery.mCustomScrollbar.min.css">
     <link rel="stylesheet" type="text/css" href="~/lib/slick/slick.css">
@@ -26,22 +26,22 @@
 
 <body>
     <div class="wrapper">
-        <header>
+        <header id="myHeader" style=" position: sticky; ">
             <div class="container">
                 <div class="header-data">
                     <div class="logo">
-                        <a href="index.html" title=""><img src="~/img/Logo Progetto 5.jpg" alt=""></a>
+                        <a href="index.html" title=""><img src="~/img/Logo Progetto 5.jpg" style="border-radius: 50%;" alt=""></a>
                     </div><!--logo end-->
                     <div class="search-bar">
                         <form>
-                            <input type="text" name="search" placeholder="Search...">
+                            <input type="text" name="search" placeholder="Cerca...">
                             <button type="submit"><i class="la la-search"></i></button>
                         </form>
                     </div><!--search-bar end-->
                     <nav>
                         <ul>
                             <li>
-                                <a href="index.html" title="">
+                                <a href="/Home/Bacheca/" title="">
                                     <span><img src="~/img/icon1.png" alt=""></span>
                                     Home
                                 </a>
@@ -51,11 +51,17 @@
                                     <span><img src="~/img/icon4.png" alt=""></span>
                                     Lista Utenti
                                 </a>
+
                             </li>
                             <li>
                                 <a href="#" title="" class="not-box-open">
                                     <span><img src="~/img/icon7.png" alt=""></span>
                                     Notifiche
+                                    @if (DAORichiestaAmicizia.GetInstance().ReadRichiestaAmicizia(HomeController.utenteLoggato.Id).Count > 0)
+                                    {
+                                        <span class="badge badge-light">@(DAORichiestaAmicizia.GetInstance().ReadRichiestaAmicizia(HomeController.utenteLoggato.Id).Count)</span>
+
+                                    }
                                 </a>
                                 @foreach (var e in DAORichiestaAmicizia.GetInstance().ReadRichiestaAmicizia(HomeController.utenteLoggato.Id))
                                 {
@@ -70,7 +76,7 @@
                                                 </div>
                                                 <div>
                                                     <a href="/Home/AccettaRichiestaAmicizia/?idRichiesta=@(((RichiestaAmicizia)e).Id)&idRichiedente=@(((RichiestaAmicizia)e).IdRichiedente)&idAccettante=@(HomeController.utenteLoggato.Id)" title="" class="follow">Accetta</a>
-                                                    <a href="/Home/RifiutaRichiestaAmicizia/idRichiesta=@(((RichiestaAmicizia)e).Id)" title="" class="danger" style="background-color:red;">Rifiuta</a><!--vedere come cambiare colore in rosso-->
+                                                    <a href="/Home/RifiutaRichiestaAmicizia/?idRichiesta=@(((RichiestaAmicizia)e).Id)" title="" class="danger" style="background-color:red;">Rifiuta</a><!--vedere come cambiare colore in rosso-->
                                                 </div>
                                             </div>
                                         </div>
@@ -84,15 +90,15 @@
                     </div><!--menu-btn end-->
                     <div class="user-account">
                         <div class="user-info">
-                            <img src="@HomeController.utenteLoggato.FotoProfilo" style="width:35%" alt="">
+                            <img src="@HomeController.utenteLoggato.FotoProfilo" style="width: 30px; height:30px;" alt="">
                             <a href="#" title="">@HomeController.utenteLoggato.Nome</a>
                             <i class="la la-sort-down"></i>
                         </div>
-                        <div class="user-account-settingss" id="users">
+                        <div class="user-account-settingss" id="users" style="z-index:-1;">
                             <ul class="us-links">
                                 <li><a href="profile-account-setting.html" title="">Impostazioni Account</a></li>
                             </ul>
-                            <h3 class="tc"><a href="sign-in.html" title="">Logout</a></h3>
+                            <h3 class="tc"><a href="/Home/Logout/" title="">Logout</a></h3>
                         </div><!--user-account-settingss end-->
                     </div>
                 </div><!--header-data end-->
@@ -100,7 +106,7 @@
         </header><!--header end-->
 
 
-        <section class="cover-sec">
+        <section class="cover-sec" style=" position: static; padding-left: 14%; ">
             <img src="@HomeController.utenteLoggato.Copertina" style="width:1600px; height:400px;" alt="">
         </section>
 
@@ -114,7 +120,7 @@
                                 <div class="main-left-sidebar">
                                     <div class="user_profile">
                                         <div class="user-pro-img">
-                                            <img src="@HomeController.utenteLoggato.FotoProfilo" style="width:170px; heigt:170px;"alt="">
+                                            <img src="@HomeController.utenteLoggato.FotoProfilo" style="width:170px; heigt:170px;" alt="">
                                         </div><!--user-pro-img end-->
                                         <div class="user_pro_status">
                                             <ul class="flw-hr">
@@ -125,9 +131,7 @@
                                                     <h4>Amici</h4>
                                                     <span>@(((Utente)Model).ListaAmicizie.Count)</span>
                                                 </li>
-                                                <li>
-                                                    <a href="my-profile.html" title="">Vedi Profilo</a>
-                                                </li>
+
                                             </ul>
                                         </div><!--user_pro_status end-->
                                         <ul class="social_links">
@@ -141,17 +145,6 @@
                                 <div class="main-ws-sec">
                                     <div class="user-tab-sec">
                                         <h3>@HomeController.utenteLoggato.Nome @HomeController.utenteLoggato.Cognome</h3>
-
-                                        <div class="tab-feed">
-                                            <ul>
-                                                <li data-tab="feed-dd" class="active">
-                                                    <a href="#" title="">
-                                                        <img src="~/img/ic1.png" alt="">
-                                                        <span>Feed</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div><!-- tab-feed end-->
                                     </div><!--user-tab-sec end-->
                                     <div class="product-feed-tab current" id="feed-dd">
                                         <div class="posts-section">
@@ -166,88 +159,83 @@
                                                     </form>
                                                 </div>
                                             </div>
-                                            <div class="post-bar">
-                                                @foreach (var p in ((Utente)Model).ListaPost)
-												{
-                                                <div class="post-bar no-margin">
-                                                    <div class="post_topbar">
-                                                        <div class="usy-dt">
-                                                            <img src="@HomeController.utenteLoggato.FotoProfilo" style="height:50px; width:50px;"alt="">
-                                                            <div class="usy-name">
-                                                                <h3>@HomeController.utenteLoggato.Nome</h3>
-                                                                <span><img src="~/img/clock.png" alt="">@(((Post)p).Data_Ora)</span>
+
+                                            @foreach (var p in ((Utente)Model).ListaPost)
+                                            {
+                                                <div class="post-bar">
+                                                    <div class="post-bar no-margin">
+                                                        <div class="post_topbar">
+                                                            <div class="usy-dt">
+                                                                <img src="@HomeController.utenteLoggato.FotoProfilo" style="height:50px; width:50px;" alt="">
+                                                                <div class="usy-name">
+                                                                    <h3>@HomeController.utenteLoggato.Nome</h3>
+                                                                    <span><img src="~/img/clock.png" alt="">@(((Post)p).Data_Ora)</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="ed-opts">
+                                                                <a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
+                                                                <ul class="ed-options">
+                                                                    <li><a href="#" title="">Modifica Post</a></li>
+                                                                </ul>
                                                             </div>
                                                         </div>
-                                                        <div class="ed-opts">
-                                                            <a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
-                                                            <ul class="ed-options">
-                                                                <li><a href="#" title="">Modifica Post</a></li>
+                                                        <div class="job_descp">
+                                                            <p>@(((Post)p).ContenutoPost)</p>
+                                                        </div>
+                                                        <div class="job-status-bar">
+                                                            <ul class="like-com">
+                                                                <li>
+                                                                    <a href="#"><i class="fas fa-heart"></i> Mi piace @(((Post)p).MiPiacePosts.Count) </a>
+
+                                                                </li>
+                                                                <li><a href="#" class="com"><i class="fas fa-comment-alt"></i> Commenti 15</a></li>
                                                             </ul>
                                                         </div>
-                                                    </div>
-                                                    <div class="job_descp">
-                                                        <p>@(((Post)p).ContenutoPost)</p>
-                                                    </div>
-                                                    <div class="job-status-bar">
-                                                        <ul class="like-com">
-                                                            <li>
-                                                                <a href="#"><i class="fas fa-heart"></i> Mi piace @(((Post)p).MiPiacePosts.Count) </a>
+                                                    </div><!--post-bar end-->
+                                                    <div class="comment-section">
+                                                        <div class="comment-sec">
 
-                                                            </li>
-                                                            <li><a href="#" class="com"><i class="fas fa-comment-alt"></i> Commenti 15</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div><!--post-bar end-->
-                                                <div class="comment-section">
-                                                    <div class="comment-sec">
-                                                        <ul>
-                                                            <li>
-                                                                <div class="comment-list">
-                                                                    <div class="bg-img">
-                                                                        <img src="~/img/resources/bg-img1.png" alt="">
-                                                                    </div>
-                                                                    <div class="comment">
-                                                                        <h3>Utente commento</h3>
-                                                                        <span><img src="~/img/clock.png" alt=""> 3 min ago</span>
-                                                                        <p>TESTO COMMENTO </p>
-                                                                    </div>
-                                                                </div><!--comment-list end-->
-                                                                <ul>
-                                                                    <li>
+
+                                                            <ul>
+                                                                <li>
+                                                                    @foreach (var g in DAOCommento.GetInstance().ReadCommenti((((Post)p).Id)))
+                                                                    {
                                                                         <div class="comment-list">
-                                                                            <!--<div class="bg-img">
-        <img src="~/img/resources/bg-img2.png" alt="">
-    </div> -->
-                                                                            <!--<div class="comment">
-        <h3></h3>
-        <span><img src="~/img/clock.png" alt=""></span>
-        <p>Hi John </p>
-        <a href="#" title=""><i class="fa fa-reply-all"></i>Reply</a>
-    </div> -->
+                                                                            <div class="bg-img">
+                                                                                <img src="@(((Commento)g).FotoProfilo)" style="width:50px; height:50px;" alt="">
+                                                                            </div>
+                                                                            <div class="comment">
+                                                                                <h3>@(((Commento)g).Nome) @(((Commento)g).Cognome) </h3>
+                                                                                <span><img src="~/img/clock.png" alt="">@(((Commento)g).Data_Ora) </span>
+                                                                                <p>@(((Commento)g).ContenutoCommento)</p>
+                                                                            </div>
                                                                         </div><!--comment-list end-->
-                                                                    </li>
-                                                                </ul>
-                                                            </li>
-                                                            <li>
-                                                            </li>
-                                                        </ul>
-                                                    </div><!--comment-sec end-->
-                                                    <div class="post-comment">
-                                                        <div class="cm_img">
-                                                            <img src="~/img/resources/bg-img4.png" alt="">
-                                                        </div>
-                                                        <div class="comment_box">
-                                                            <form>
-                                                                <input type="text" placeholder="Scrivi un commento">
-                                                                <button type="submit">Invia</button>
-                                                            </form>
-                                                        </div>
-                                                    </div><!--post-comment end-->
-                                                </div><!--comment-section end-->
-												}
+                                                                    }
+                                                                </li>
+                                                            </ul>
+
+                                                        </div><!--comment-sec end-->
+                                                        <div class="post-comment">
+                                                            <div class="cm_img">
+                                                                <img src="@(HomeController.utenteLoggato.FotoProfilo)" alt="">
+                                                            </div>
+                                                            <div class="comment_box">
+                                                                <form action="/User/InserisciCommento/">
+                                                                    <input type="hidden" name="idpost" value="@(((Post)p).Id)" />
+                                                                    <input type="hidden" name="idutente" value="@(HomeController.utenteLoggato.Id)" />
+                                                                    <input type="hidden" name="data_ora" value="2022-10-06 10:57:00" />
+                                                                    <input type="text" name="contenutocommento" placeholder="Scrivi un commento">
+                                                                    <button type="submit">Invia</button>
+                                                                </form>
+                                                            </div>
+                                                        </div><!--post-comment end-->
+                                                    </div><!--comment-section end-->
+                                                </div><!--post-bar end-->
+
+                                            }
+                                            <div style="background-color:white; "></div>
 
 
-                                            </div><!--post-bar end-->
 
 
 
@@ -284,14 +272,14 @@
                                             </div><!--sd-title end-->
                                             <div class="suggestions-list">
                                                 @foreach (var m in ((Utente)Model).ListaAmicizie)
-													{
-                                                <div class="suggestion-usd">
-                                                    <img src="@(((Amicizia)m).FotoProfilo)" style="width:50px; height:50px;"alt="">
-                                                    <div class="sgt-text">
-                                                        <h4>@(((Amicizia)m).Nome) @(((Amicizia)m).Cognome)</h4>
+                                                {
+                                                    <div class="suggestion-usd">
+                                                        <img src="@(((Amicizia)m).FotoProfilo)" style="width:50px; height:50px;" alt="">
+                                                        <div class="sgt-text">
+                                                            <h4>@(((Amicizia)m).Nome) @(((Amicizia)m).Cognome)</h4>
+                                                        </div>
                                                     </div>
-                                                </div>
-													}
+                                                }
 
 
 
@@ -357,5 +345,20 @@
     <script type="text/javascript" src="~/lib/slick/slick.min.js"></script>
     <script type="text/javascript" src="~/js/scrollbar.js"></script>
     <script type="text/javascript" src="~/js/script.js"></script>
+    <script>window.onscroll = function () { myFunction() };
+
+        var header = document.getElementById("myHeader");
+        var image = document.getElementById("imageID");
+        var sticky = header.offsetTop;
+
+        function myFunction() {
+            if (window.pageYOffset > sticky) {
+                header.classList.add("sticky");
+                image.classList.add("sticky2");
+            } else {
+                header.classList.remove("sticky");
+                image.classList.remove("sticky2");
+            }
+        }</script>
 </body>
 </html>

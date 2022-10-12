@@ -43,7 +43,7 @@ namespace Dolphin.Models
         {
             List<Entity> ris = new List<Entity>();
 
-            List<Dictionary<string, string>> tabella = db.Read($"select idUtente2 from Amicizie where idUtente={id}");
+            List<Dictionary<string, string>> tabella = db.Read($"select idutente, idUtente2 from Amicizie where idUtente={id}");
   
             foreach (Dictionary<string, string> riga in tabella)
             {

@@ -124,10 +124,12 @@
                                             <ul>
                                                 @foreach (var s in DAOAmicizia.GetInstance().LeggiAmicizia(HomeController.utenteLoggato.Id))
                                                 {
-                                                    @if (s.Id != (((Utente)p).Id))
+                                                        Console.WriteLine(s);
+                                                    @if ((((Amicizia)s).IdUtente2) != HomeController.utenteLoggato.Id)
                                                     {
                                                         <li><a href="/User/InviaRichiesta/@(((Utente)p).Id)" title="" class="follow">Invia Richiesta</a></li>
-                                                    }
+                                                        
+                                                        }
                                                 }
 
 

@@ -94,7 +94,7 @@
                             <a href="#" title="">@HomeController.utenteLoggato.Nome</a>
                             <i class="la la-sort-down"></i>
                         </div>
-                        <div class="user-account-settingss" id="users">
+                        <div class="user-account-settingss" id="users" style="z-index:-1;">
                             <ul class="us-links">
                                 <li><a href="profile-account-setting.html" title="">Impostazioni Account</a></li>
                             </ul>
@@ -139,13 +139,17 @@
                                 <div class="main-ws-sec">
                                     <div class="post-topbar">
                                         <div class="user-picy">
-                                            <img src="@HomeController.utenteLoggato.FotoProfilo" alt="">
+                                            <img src="@HomeController.utenteLoggato.FotoProfilo" style="padding-right:4px;" alt="">
                                         </div>
-                                        <div class="post-st">
-                                            <ul>
-                                                <li><a class="post-jb active" href="#" title="">Post a Job</a></li>
-                                            </ul>
-                                        </div><!--post-st end-->
+                                        <div class="comment_box">
+                                            <form action="/User/InserisciPost/">
+                                                <input type="hidden" name="idutente" value="@HomeController.utenteLoggato.Id" />
+                                                <input type="hidden" name="data_ora" value="2022-10-06 10:57:00" />
+                                                <input type="hidden" name="mipiace" value="0" />
+                                                <textarea class="form-control input-lg no-border" rows="2" name="contenutopost" style="width:80%; display:initial" placeholder="A cosa stai pensando? "></textarea>
+                                                <button type="submit">INVIA</input>
+                                            </form>
+                                        </div>
                                     </div><!--post-topbar end-->
                                     <div class="posts-section">
                                         <div class="posty">
@@ -183,23 +187,25 @@
                                                 <div class="comment-section">
                                                     <div class="comment-sec">
 
-                                                        @foreach (var g in DAOCommento.GetInstance().ReadCommenti((((Bacheca)p).IdPost)))
-                                                        {
+                                                        
                                                             <ul>
                                                                 <li>
-                                                                    <div class="comment-list">
-                                                                        <div class="bg-img">
-                                                                            <img src="@(((Commento)g).FotoProfilo)" style="width:50px; height:50px;" alt="">
-                                                                        </div>
-                                                                        <div class="comment">
-                                                                            <h3>@(((Commento)g).Nome) @(((Commento)g).Cognome) </h3>
-                                                                            <span><img src="~/img/clock.png" alt="">@(((Commento)g).Data_Ora) </span>
-                                                                            <p>@(((Commento)g).ContenutoCommento)</p>
-                                                                        </div>
-                                                                    </div><!--comment-list end-->
-                                                                </li>
+                                                                    @foreach (var g in DAOCommento.GetInstance().ReadCommenti((((Bacheca)p).IdPost)))
+                                                                    {
+                                                                        <div class="comment-list">
+                                                                            <div class="bg-img">
+                                                                                <img src="@(((Commento)g).FotoProfilo)" style="width:50px; height:50px;" alt="">
+                                                                            </div>
+                                                                            <div class="comment">
+                                                                                <h3>@(((Commento)g).Nome) @(((Commento)g).Cognome) </h3>
+                                                                                <span><img src="~/img/clock.png" alt="">@(((Commento)g).Data_Ora) </span>
+                                                                                <p>@(((Commento)g).ContenutoCommento)</p>
+                                                                            </div>
+                                                                        </div><!--comment-list end-->
+                                                                        }
+                                                                    </li>
                                                             </ul>
-                                                        }
+                                                        
                                                     </div><!--comment-sec end-->
                                                     <div class="post-comment">
                                                         <div class="cm_img">
@@ -219,58 +225,6 @@
                                                 <!--FINE FOREACH-->
                                             }
                                         </div><!--posty end-->
-                                        <div class="top-profiles">
-                                            <div class="pf-hd">
-                                                <h3>Creatori</h3>
-                                                <i class="la la-ellipsis-v"></i>
-                                            </div>
-                                            <div class="profiles-slider">
-                                                <div class="user-profy">
-                                                    <img src="~/img/resources/user1.png" alt="">
-                                                    <h3>Nino</h3>
-                                                    <span>Graphic Designer</span>
-                                                    <ul>
-                                                        <li><a href="#" title="" class="followw">Follow</a></li>
-                                                        <li><a href="#" title="" class="envlp"><img src="~/img/envelop.png" alt=""></a></li>
-                                                        <li><a href="#" title="" class="hire">hire</a></li>
-                                                    </ul>
-                                                    <a href="#" title="">View Profile</a>
-                                                </div><!--user-profy end-->
-                                                <div class="user-profy">
-                                                    <img src="~/img/resources/user2.png" alt="">
-                                                    <h3>Andrea </h3>
-                                                    <span>Graphic Designer</span>
-                                                    <ul>
-                                                        <li><a href="#" title="" class="followw">Follow</a></li>
-                                                        <li><a href="#" title="" class="envlp"><img src="~/img/envelop.png" alt=""></a></li>
-                                                        <li><a href="#" title="" class="hire">hire</a></li>
-                                                    </ul>
-                                                    <a href="#" title="">View Profile</a>
-                                                </div><!--user-profy end-->
-                                                <div class="user-profy">
-                                                    <img src="~/img/resources/user3.png" alt="">
-                                                    <h3>Ahmed</h3>
-                                                    <span>Graphic Designer</span>
-                                                    <ul>
-                                                        <li><a href="#" title="" class="followw">Follow</a></li>
-                                                        <li><a href="#" title="" class="envlp"><img src="~/img/envelop.png" alt=""></a></li>
-                                                        <li><a href="#" title="" class="hire">hire</a></li>
-                                                    </ul>
-                                                    <a href="#" title="">View Profile</a>
-                                                </div><!--user-profy end-->
-                                                <div class="user-profy">
-                                                    <img src="~/img/resources/user1.png" alt="">
-                                                    <h3>Giovanni</h3>
-                                                    <span>Graphic Designer</span>
-                                                    <ul>
-                                                        <li><a href="#" title="" class="followw">Follow</a></li>
-                                                        <li><a href="#" title="" class="envlp"><img src="~/img/envelop.png" alt=""></a></li>
-                                                        <li><a href="#" title="" class="hire">hire</a></li>
-                                                    </ul>
-                                                    <a href="#" title="">Vedi Profilo</a>
-                                                </div><!--user-profy end-->
-                                            </div><!--profiles-slider end-->
-                                        </div><!--top-profiles end-->
 
                                     </div><!--posts-section end-->
                                 </div><!--main-ws-sec end-->
@@ -295,7 +249,7 @@
                                                 <span>@(DAOAmicizia.GetInstance().ReadAmicizia(HomeController.utenteLoggato.Id).Count)</span>
                                             </li>
                                             <li>
-                                                <a href="my-profile.html" title="">Vedi Profilo</a>
+                                                <a href="/User/UserAccount/" title="">Vedi Profilo</a>
                                             </li>
                                         </ul>
                                     </div><!--user-data end-->
