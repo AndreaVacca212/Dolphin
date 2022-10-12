@@ -15,8 +15,6 @@ namespace Dolphin.Models
         public int IdCommento { get; set; }
        // public int MiPiace { get; set; }
 
-        public Bacheca()
-        {
-        }
+        public Bacheca() { }
     }
 }

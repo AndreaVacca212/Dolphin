@@ -57,9 +57,6 @@ namespace Dolphin.Models
             return ris;
         }
 
-        
-
-        
 
     }
 }
