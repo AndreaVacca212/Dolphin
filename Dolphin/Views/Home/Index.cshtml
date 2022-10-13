@@ -50,26 +50,26 @@
                 <div class="loginform">
                     <form id="login" action="/Home/Salva/" method="post">
                         <p>
-                            <input type="text" id="nome" name="nome" placeholder="Nome" value="" class="radius mini" />
-                            <input type="text" id="cognome" name="cognome" placeholder="Cognome" value="" class="radius mini" />
+                            <input type="text" id="nome" name="nome" placeholder="Nome" value="" class="radius mini" required />
+                            <input type="text" id="cognome" name="cognome" placeholder="Cognome" value="" class="radius mini" required />
                         </p>
                         <p>
-                            <input type="tel" id="telefono" name="telefono" placeholder="Numero di Cellulare" required=required />
+                            <input type="tel" id="telefono" name="telefono" placeholder="Numero di Cellulare" required />
                         </p>
                         <p>
-                            <input type="text" id="email" name="email" placeholder="Email" value="" class="radius" />
+                            <input type="text" id="email" name="email" placeholder="Email" value="" class="radius" required />
                         </p>
                         <p>
-                            <input type="password" id="pass" name="pass" placeholder="Password" class="radius" />
+                            <input type="password" id="pass" name="pass" placeholder="Password" class="radius" required/>
                         </p>
                         <p>
-                            <input type="password" id="confermapass" name="confermapass" placeholder="Conferma Password" class="radius" />
+                            <input type="password" id="confermapass" name="confermapass" placeholder="Conferma Password" class="radius" required />
                         </p>
                         <p>
-                            <input type="text" id="indirizzo" name="indirizzo" placeholder="Indirizzo" value="" class="radius" />
+                            <input type="text" id="indirizzo" name="indirizzo" placeholder="Indirizzo" value="" class="radius" required />
                         </p>
                         <p>
-                            <input type="text" id="codicefiscale" name="codice_fiscale" placeholder="Codice Fiscale" value="" class="radius" />
+                            <input type="text" id="codicefiscale" name="codice_fiscale" placeholder="Codice Fiscale" value="" class="radius" required />
                             <input type="hidden" id="ruolo" name="ruolo" value="user" />
                         </p>
                         <p>
