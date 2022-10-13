@@ -12,7 +12,8 @@ create table Utenti
 	indirizzo varchar(100),
 	codice_fiscale varchar(100),
 	fotoProfilo varchar(1000),
-	copertina varchar(2000)
+	copertina varchar(2000),
+	ruolo varchar(20)
 );
 
 insert into Utenti(nome, cognome, telefono, email, pass, indirizzo, codice_fiscale, fotoProfilo) 
@@ -256,3 +257,30 @@ FROM Commenti
 INNER JOIN Utenti on Utenti.id = Commenti.idUtente
 where Commenti.idPost = 
 
+create table CommentiCommenti
+(
+	id int primary key identity(1,1),
+	idUtente int,
+	idCommento int,
+	contenutoCommento varchar(800),
+	data_ora datetime,
+	foreign key (idUtente) references Utenti(id)
+	on update no action
+	on delete no action,
+	foreign key (idCommento) references Commenti(id)
+	on update no action
+	on delete no action,
+);
+
+
+alter table Utenti
+add ruolo varchar(20);
+
+select * from utenti;
+
+update utenti set ruolo='user' where ruolo is null;
+
+insert into Utenti
+(nome,cognome,email,pass,ruolo)
+values
+('Capo','Supremo','admin@dolphin.com',HASHBYTES('sha2_256','admin'),'admin');
