@@ -12,6 +12,7 @@ namespace Dolphin.Models
         public string Codice_Fiscale { get; set; }
         public string FotoProfilo { get; set; }
         public string Copertina { get; set; }
+        public string Ruolo { get; set; }
         public List<Entity> ListaPost { get; set; }
         public List<Entity> ListaAmicizie { get; set; }
 

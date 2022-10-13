@@ -11,6 +11,7 @@ namespace Dolphin.Models
         public string ContenutoPost { get; set; }
         public DateTime Data_Ora { get; set; }
         public string ContenutoCommento { get; set; }
+        public string IdUtente { get; set; }
         public int IdPost { get; set; }
         public int IdCommento { get; set; }
        // public int MiPiace { get; set; }

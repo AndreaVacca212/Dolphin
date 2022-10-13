@@ -96,7 +96,7 @@
                         </div>
                         <div class="user-account-settingss" id="users" style="z-index:-1;">
                             <ul class="us-links">
-                                <li><a href="profile-account-setting.html" title="">Impostazioni Account</a></li>
+                                <li><a href="/User/ModificaProfilo2/@(HomeController.utenteLoggato.Id)" title="">Impostazioni Account</a></li>
                             </ul>
                             <h3 class="tc"><a href="/Home/Logout/" title="">Logout</a></h3>
                         </div><!--user-account-settingss end-->
@@ -126,10 +126,10 @@
                                             <li><a href="#" title="">Cookies Policy</a></li>
                                             <li><a href="#" title="">Career</a></li>
                                             <li><a href="#" title="">Language</a></li>
-                                            <li><a href="#" title="">Copyright Policy</a></li>
+                                            <li><a href="#" title="">Tizio Policy</a></li>
                                         </ul>
                                         <div class="cp-sec">
-                                            <img src="~/img/logo2.png" alt="">
+                                            <img src="~/img/Logo Progetto 5.jpg" style="width:10%;" alt="">Dolphin
                                             <p><img src="~/img/cp.png" alt="">Copyright 2022</p>
                                         </div>
                                     </div><!--tags-sec end-->
@@ -146,7 +146,7 @@
                                                 <input type="hidden" name="idutente" value="@HomeController.utenteLoggato.Id" />
                                                 <input type="hidden" name="data_ora" value="2022-10-06 10:57:00" />
                                                 <input type="hidden" name="mipiace" value="0" />
-                                                <textarea class="form-control input-lg no-border" rows="2" name="contenutopost" style="width:80%; display:initial" placeholder="A cosa stai pensando? "></textarea>
+                                                <textarea class="form-control input-lg no-border" rows="2" name="contenutopost" style="width:70%; display:initial" placeholder="A cosa stai pensando? "></textarea>
                                                 <button type="submit">INVIA</input>
                                             </form>
                                         </div>
@@ -161,7 +161,7 @@
                                                         <div class="usy-dt">
                                                             <img src="@(((Bacheca)p).FotoUtente)" alt="" style="width:50px; height:50px;">
                                                             <div class="usy-name">
-                                                                <h3>@(((Bacheca)p).NomeUtente) @(((Bacheca)p).CognomeUtente)</h3>
+                                                                <a href="/User/ViewProfile/@(((Bacheca)p).IdUtente)"><h3>@(((Bacheca)p).NomeUtente) @(((Bacheca)p).CognomeUtente)</h3> </a>
                                                                 <span><img src="~/img/clock.png" alt="">@(((Bacheca)p).Data_Ora)</span>
                                                             </div>
                                                         </div>
@@ -178,7 +178,7 @@
                                                     <div class="job-status-bar">
                                                         <ul class="like-com">
                                                             <li>
-                                                                <a href="/Home/NuovoLike/@(((Bacheca)p).IdPost)"><i class="fas fa-heart"></i> Mi piace  @(DAOPost.GetInstance().ReadLikes(HomeController.utenteLoggato.Id).Count)</a>
+                                                                <a href="/Home/NuovoLike/@(((Bacheca)p).IdPost)"><i class="fas fa-heart"></i> Mi piace  @(DAOPost.GetInstance().ReadLikes(((Bacheca)p).IdPost).Count)</a>
                                                             </li>
                                                             <li><a href="#"><i class="fas fa-comment-alt"></i> Commenti @(DAOCommento.GetInstance().ReadCommenti((((Bacheca)p).IdPost)).Count)</a></li>
                                                         </ul>

@@ -41,7 +41,7 @@ namespace Dolphin.Models
         {
             List<Entity> ris = new List<Entity>();
 
-            List<Dictionary<string, string>> tabella = db.Read($"SELECT distinct Amici.nomeUtente, amici.cognomeUtente, Posts.contenutopost, Posts.data_ora, amici.fotoutente, posts.id as idPost " +
+            List<Dictionary<string, string>> tabella = db.Read($"SELECT distinct Amici.idUtente as idUtente, Amici.nomeUtente, amici.cognomeUtente, Posts.contenutopost, Posts.data_ora, amici.fotoutente, posts.id as idPost " +
                                                                $"FROM Posts " +
                                                                $"INNER JOIN Amici ON Posts.idUtente=Amici.idAmicoLato1 OR Posts.idUtente = Amici.idAmicoLato2 " +
                                                                $"WHERE (Amici.idAmicoLato1={id} OR Amici.idAmicoLato2={id}) AND Posts.idUtente != {id} AND (Amici.idUtente != {id});");

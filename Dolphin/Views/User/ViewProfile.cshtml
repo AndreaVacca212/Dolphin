@@ -107,7 +107,7 @@
 
 
         <section class="cover-sec" style=" position: static; padding-left: 14%; ">
-            <img src="@HomeController.utenteLoggato.Copertina" style="width:1600px; height:400px;" alt="">
+            <img src="@(((Utente)Model).Copertina)" style="width:1600px; height:400px;" alt="">
         </section>
 
 
@@ -120,7 +120,7 @@
                                 <div class="main-left-sidebar">
                                     <div class="user_profile">
                                         <div class="user-pro-img">
-                                            <img src="@HomeController.utenteLoggato.FotoProfilo" style="width:170px; heigt:170px;" alt="">
+                                            <img src="@(((Utente)Model).FotoProfilo)" style="width:170px; heigth:170px;" alt="">
                                         </div><!--user-pro-img end-->
                                         <div class="user_pro_status">
                                             <ul class="flw-hr">
@@ -144,21 +144,11 @@
                             <div class="col-lg-6">
                                 <div class="main-ws-sec">
                                     <div class="user-tab-sec">
-                                        <h3>@HomeController.utenteLoggato.Nome @HomeController.utenteLoggato.Cognome</h3>
+                                        <h3>@(((Utente)Model).Nome) @(((Utente)Model).Cognome)</h3>
                                     </div><!--user-tab-sec end-->
                                     <div class="product-feed-tab current" id="feed-dd">
                                         <div class="posts-section">
-                                            <div class="post-bar">
-                                                <div class="comment_box">
-                                                    <form action="/User/InserisciPost/">
-                                                        <input type="hidden" name="idutente" value="@HomeController.utenteLoggato.Id" />
-                                                        <input type="hidden" name="data_ora" value="2022-10-06 10:57:00" />
-                                                        <input type="hidden" name="mipiace" value="0" />
-                                                        <textarea class="form-control input-lg no-border" rows="2" name="contenutopost" placeholder="A cosa stai pensando? "></textarea>
-                                                        <button type="submit">INVIA</input>
-                                                    </form>
-                                                </div>
-                                            </div>
+                                            
 
                                             @foreach (var p in ((Utente)Model).ListaPost)
                                             {
@@ -166,9 +156,9 @@
                                                     <div class="post-bar no-margin">
                                                         <div class="post_topbar">
                                                             <div class="usy-dt">
-                                                                <img src="@HomeController.utenteLoggato.FotoProfilo" style="height:50px; width:50px;" alt="">
+                                                                <img src="@(((Post)p).FotoProfilo)" style="height:50px; width:50px;" alt="">
                                                                 <div class="usy-name">
-                                                                    <h3>@HomeController.utenteLoggato.Nome</h3>
+                                                                    <h3>@(((Post)p).Nome) @(((Post)p).Cognome)</h3>
                                                                     <span><img src="~/img/clock.png" alt="">@(((Post)p).Data_Ora)</span>
                                                                 </div>
                                                             </div>
@@ -237,9 +227,6 @@
 
 
 
-
-
-
                                         </div><!--posts-section end-->
                                     </div><!--product-feed-tab end-->
 
@@ -261,7 +248,24 @@
                             <div class="col-lg-3">
                                 <div class="right-sidebar">
                                     <div class="message-btn">
-                                        <!--<a href="#" title=""><i class="fa fa-envelope"></i> aggiungi amico</a> -->
+                                        @foreach (var x in DAOAmicizia.GetInstance().ReadDef())
+                                        {
+                                            @if (HomeController.utenteLoggato.Id == ((Amicizia)x).IdUtente)
+                                            {
+                                                if ((((Utente)Model).Id) == ((Amicizia)x).IdUtente2)
+                                                {
+                                                    <a href="" title=""><i class="fa fa-user-minus"></i> Elimina amico</a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="/User/RichiediAmicizia/?idRichiedente=@HomeController.utenteLoggato.Id&idAccettante=@(((Utente)Model).Id)" title=""><i class="fa fa-user-plus"></i> Aggiungi Amico</a>
+
+                                                }
+
+                                            }
+
+                                        }
+
                                     </div>
                                     <div class="widget widget-portfolio">
 

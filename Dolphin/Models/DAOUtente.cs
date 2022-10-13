@@ -39,6 +39,23 @@ namespace Dolphin.Models
             return ris;
         }
 
+        public List<Entity> LeggiUtente(int id)
+        {
+            List<Entity> ris = new List<Entity>();
+
+            List<Dictionary<string, string>> tabella = db.Read($"SELECT * FROM Utenti WHERE id = {id};");
+
+            foreach (Dictionary<string, string> riga in tabella)
+            {
+                Utente a = new Utente();
+                a.FromDictionary(riga);
+
+                ris.Add(a);
+            }
+
+            return ris;
+        }
+
 
 
 
@@ -63,12 +80,16 @@ namespace Dolphin.Models
             return ris;
         }
 
-        public List<Entity> Read3()
+
+
+
+        public List<Entity> Read3(int id)
         {
             List<Entity> ris = new List<Entity>();
 
             List<Dictionary<string, string>> tabella = db.Read($"SELECT * " +
-                                                               $"FROM UtentiView ;");
+                                                               $"FROM Utenti " +
+                                                               $"WHERE id != {id}  ;");
             foreach(Dictionary<string, string> riga in tabella)
             {
                 Utente a = new Utente();

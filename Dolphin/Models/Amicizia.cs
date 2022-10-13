@@ -9,6 +9,7 @@ namespace Dolphin.Models
         public string Nome { get; set; }
         public string Cognome { get; set; }
         public string FotoProfilo { get; set; }
+        public int UtenteId { get; set; }
         public Amicizia() { }
     }
 }

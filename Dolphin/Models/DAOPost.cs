@@ -43,7 +43,7 @@ namespace Dolphin.Models
         {
             List<Entity> ris = new List<Entity>();
 
-            List<Dictionary<string, string>> tabella = db.Read($"SELECT * FROM Posts WHERE Posts.idUtente = {id} ORDER BY Posts.data_ora desc;");
+            List<Dictionary<string, string>> tabella = db.Read($"SELECT Posts.id, Posts.contenutoPost, Posts.data_ora, Utenti.nome, Utenti.cognome, utenti.fotoProfilo FROM Posts INNER JOIN Utenti on Utenti.id = Posts.idUtente WHERE Posts.idUtente = {id} ORDER BY Posts.data_ora desc;");
 
             foreach (Dictionary<string, string> riga in tabella)
             {

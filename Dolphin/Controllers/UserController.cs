@@ -19,6 +19,11 @@ namespace Dolphin.Controllers
             return View(DAOUtente.GetInstance().Read2(HomeController.utenteLoggato.Id)[0]);
         }
 
+        public IActionResult ViewProfile(int id)
+        {
+            return View(DAOUtente.GetInstance().Read2(id)[0]);
+        }
+
         public IActionResult ModificaProfilo(int id)
         {
             return View(DAOUtente.GetInstance().Cerca(id));

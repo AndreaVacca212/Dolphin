@@ -24,38 +24,35 @@
     <link rel="stylesheet" type="text/css" href="~/css/responsive.css">
 </head>
 <body>
-	<div class="wrapper">	
+    <div class="wrapper">
 
-		<header>
-			<div class="container">
-				<div class="header-data">
-					<div class="logo">
-						<a href="index.html" title=""><img src="images/logo.png" alt=""></a>
-					</div><!--logo end-->
-					<div class="search-bar">
-						<form>
-							<input type="text" name="search" placeholder="Search...">
-							<button type="submit"><i class="la la-search"></i></button>
-						</form>
-					</div><!--search-bar end-->
-					<nav>
-						<ul>
-							<li>
-								<a href="index.html" title="">
-									<span><img src="images/icon1.png" alt=""></span>
-									Home
-								</a>
-							</li>
-							<li>
-								<a href="profiles.html" title="">
-									<span><img src="images/icon4.png" alt=""></span>
-									Amici
-								</a>
-								<ul>
-									<li><a href="user-profile.html" title="">User Profile</a></li>
-									<li><a href="my-profile-feed.html" title="">my-profile-feed</a></li>
-								</ul>
-							</li>
+        <header id="myHeader" style=" position: sticky; ">
+            <div class="container">
+                <div class="header-data">
+                    <div class="logo">
+                        <a href="index.html" title=""><img src="~/img/Logo Progetto 5.jpg" style="border-radius: 50%;" alt=""></a>
+                    </div><!--logo end-->
+                    <div class="search-bar">
+                        <form>
+                            <input type="text" name="search" placeholder="Cerca...">
+                            <button type="submit"><i class="la la-search"></i></button>
+                        </form>
+                    </div><!--search-bar end-->
+                    <nav>
+                        <ul>
+                            <li>
+                                <a href="/Home/Bacheca/" title="">
+                                    <span><img src="~/img/icon1.png" alt=""></span>
+                                    Home
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Home/UserList/" title="">
+                                    <span><img src="~/img/icon4.png" alt=""></span>
+                                    Lista Utenti
+                                </a>
+
+                            </li>
                             <li>
                                 <a href="#" title="" class="not-box-open">
                                     <span><img src="~/img/icon7.png" alt=""></span>
@@ -86,145 +83,144 @@
                                     </div>
                                 }
                             </li>
-						</ul>
-					</nav><!--nav end-->
-					<div class="menu-btn">
-						<a href="#" title=""><i class="fa fa-bars"></i></a>
-					</div><!--menu-btn end-->
-					<div class="user-account">
-						<div class="user-info">
-							<img src="images/resources/user.png" alt="">
-							<a href="#" title="">John</a>
-							<i class="la la-sort-down"></i>
-						</div>
-						<div class="user-account-settingss" id="users">
-							<ul class="us-links">
-								<li><a href="profile-account-setting.html" title="">Impostazioni Account</a></li>
-							</ul>
-							<h3 class="tc"><a href="sign-in.html" title="">Logout</a></h3>
-						</div><!--user-account-settingss end-->
-					</div>
-				</div><!--header-data end-->
-			</div>
-		</header><!--header end-->
+                        </ul>
+                    </nav><!--nav end-->
+                    <div class="menu-btn">
+                        <a href="#" title=""><i class="fa fa-bars"></i></a>
+                    </div><!--menu-btn end-->
+                    <div class="user-account">
+                        <div class="user-info">
+                            <img src="@HomeController.utenteLoggato.FotoProfilo" style="width: 30px; height:30px;" alt="">
+                            <a href="#" title="">@HomeController.utenteLoggato.Nome</a>
+                            <i class="la la-sort-down"></i>
+                        </div>
+                        <div class="user-account-settingss" id="users" style="z-index:-1;">
+                            <ul class="us-links">
+                                <li><a href="/User/ModificaProfilo2/@(HomeController.utenteLoggato.Id)" title="">Impostazioni Account</a></li>
+                            </ul>
+                            <h3 class="tc"><a href="/Home/Logout/" title="">Logout</a></h3>
+                        </div><!--user-account-settingss end-->
+                    </div>
+                </div><!--header-data end-->
+            </div>
+        </header><!--header end-->
 
-		<section class="profile-account-setting">
-			<div class="container">
-				<div class="account-tabs-setting">
-					<div class="row">
-						<div class="col-lg-3">
-							<div class="acc-leftbar">
-								<!-- menu sinistra cancellato-->
-							</div><!--acc-leftbar end-->
-						</div>
-						<div class="col-lg-9">
-							<div class="tab-content" id="nav-tabContent">
-								<div class="tab-pane fade show active" id="nav-acc" role="tabpanel" aria-labelledby="nav-acc-tab">
-									<div class="acc-setting">
-										<h3>Modifica Profilo</h3>
-										<form>
-											<div class="notbar">
-												         <div class="col-lg-8"> <!--FORM-->
-                                                             <div class="card">
-                                                               <form action="/User/ModificaUtente/">
-                                                                  <!--inserire qui l'url di destinazione-->
-                                                                 <div class="card-body">
-                                                                   <div class="row mb-3">
-                                                                     <div class="col-sm-3">
-                                                                         <h6 class="mb-0">Nome</h6>
-                                                                     </div>
-                                                                     <div class="col-sm-9 text-secondary">
-                                                                        <input type="hidden" id="id" name="id" value="@HomeController.utenteLoggato.Id">
+        <section class="profile-account-setting">
+            <div class="container">
+                <div class="account-tabs-setting">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="acc-leftbar">
+                                <!-- menu sinistra cancellato-->
+                            </div><!--acc-leftbar end-->
+                        </div>
+                        <div class="col-lg-9">
+                            <div class="tab-content" id="nav-tabContent">
+                                <div class="tab-pane fade show active" id="nav-acc" role="tabpanel" aria-labelledby="nav-acc-tab">
+                                    <div class="acc-setting">
+                                        <h3>Modifica Profilo</h3>
+                                        <div class="notbar">
+                                            <div class="col-lg-8">
+                                                <!--FORM-->
+                                                <div class="card">
+                                                    <form action="/User/ModificaUtente/">
+                                                        <!--inserire qui l'url di destinazione-->
+                                                        <div class="card-body">
+                                                            <div class="row mb-3">
+                                                                <div class="col-sm-3">
+                                                                    <h6 class="mb-0">Nome</h6>
+                                                                </div>
+                                                                <div class="col-sm-9 text-secondary">
+                                                                    <input type="hidden" id="id" name="id" value="@HomeController.utenteLoggato.Id">
 
-                                                                        <input type="text" class="form-control" id="nome" name="nome" value="@HomeController.utenteLoggato.Nome">
-                                                                     </div>
-                                                                   </div>
-                                                                   <div class="row mb-3">
-                                                                     <div class="col-sm-3">
-                                                                       <h6 class="mb-0">Cognome</h6>
-                                                                     </div>
-                                                                     <div class="col-sm-9 text-secondary">
-                                                                         <input type="text" class="form-control" id="cognome" name="cognome" value="@HomeController.utenteLoggato.Cognome">
-                                                                     </div>
-                                                                   </div>
-                                                                   <div class="row mb-3">
-                                                                     <div class="col-sm-3">
-                                                                        <h6 class="mb-0">Email</h6>
-                                                                     </div>
-                                                                     <div class="col-sm-9 text-secondary">
-                                                                         <input type="text" class="form-control" id="email" name="email" value="@HomeController.utenteLoggato.Email">
-                                                                     </div>
-                                                                   </div>
-                                                                   <div class="row mb-3">
-                                                                      <div class="col-sm-3">
-                                                                         <h6 class="mb-0">Cellulare</h6>
-                                                                      </div>
-                                                                      <div class="col-sm-9 text-secondary">
-                                                                          <input type="tel" class="form-control" id="telefono" name="telefono" value="@HomeController.utenteLoggato.Telefono" required>
-                                                                      </div>
-                                                                   </div>
-                                                                   <div class="row mb-3">
-                                                                      <div class="col-sm-3">
-                                                                         <h6 class="mb-0">Indirizzo</h6>
-                                                                      </div>
-                                                                      <div class="col-sm-9 text-secondary">
-                                                                          <input type="text" class="form-control" id="indirizzo" name="indirizzo" value="@HomeController.utenteLoggato.Indirizzo">
-                                                                      </div>
-                                                                   </div>
-                                                                   <div class="row mb-3">
-                                                                     <div class="col-sm-3">
-                                                                        <h6 class="mb-0">Codice Fiscale</h6>
-                                                                     </div>
-                                                                     <div class="col-sm-9 text-secondary">
-                                                                        <input type="text" class="form-control" id="codicefiscale" name="codice_fiscale" value="@HomeController.utenteLoggato.Codice_Fiscale">
-                                                                     </div>
-                                                                   </div>
-                                                                   <div class="row mb-3">
-                                                                     <div class="col-sm-3">
-                                                                        <h6 class="mb-0">Foto Profilo</h6>
-                                                                     </div>
-                                                                     <div class="col-sm-9 text-secondary">
-                                                                        <input type="text" class="form-control" id="fotoprofilo" name="fotoprofilo" value="@HomeController.utenteLoggato.FotoProfilo">
-                                                                     </div>
-                                                                   </div>
-                                                                   <div class="row mb-3">
-                                                                      <div class="col-sm-3">
-                                                                         <h6 class="mb-0">Foto Copertina</h6>
-                                                                      </div>
-                                                                      <div class="col-sm-9 text-secondary">
-                                                                          <input type="text" class="form-control" id="copertina" name="copertina" value="@HomeController.utenteLoggato.Copertina">
-                                                                      </div>
-                                                                   </div>
-                                                                   <div class="row">
-                                                                      <div class="col-sm-3"></div>
-                                                                      <div class="col-sm-9 text-secondary">
-                                                                             <input type="submit" class="btn btn-primary px-4" value="Modifica">
-                                                                      </div>
-                                                                   </div>
-                                                                 </div>
-                                                               </form>
-                                                             </div>
-                    
-                                                         </div>
-												
-											</div><!--notbar end-->
-												
-										</form>
-									</div><!--acc-setting end-->
-								</div>
-							  	
-							  	
-							  
-							  
-							</div>
-						</div>
-					</div>
-				</div><!--account-tabs-setting end-->
-			</div>
-		</section>
-		
+                                                                    <input type="text" class="form-control" id="nome" name="nome" value="@HomeController.utenteLoggato.Nome">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-3">
+                                                                <div class="col-sm-3">
+                                                                    <h6 class="mb-0">Cognome</h6>
+                                                                </div>
+                                                                <div class="col-sm-9 text-secondary">
+                                                                    <input type="text" class="form-control" id="cognome" name="cognome" value="@HomeController.utenteLoggato.Cognome">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-3">
+                                                                <div class="col-sm-3">
+                                                                    <h6 class="mb-0">Email</h6>
+                                                                </div>
+                                                                <div class="col-sm-9 text-secondary">
+                                                                    <input type="text" class="form-control" id="email" name="email" value="@HomeController.utenteLoggato.Email">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-3">
+                                                                <div class="col-sm-3">
+                                                                    <h6 class="mb-0">Cellulare</h6>
+                                                                </div>
+                                                                <div class="col-sm-9 text-secondary">
+                                                                    <input type="tel" class="form-control" id="telefono" name="telefono" value="@HomeController.utenteLoggato.Telefono" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-3">
+                                                                <div class="col-sm-3">
+                                                                    <h6 class="mb-0">Indirizzo</h6>
+                                                                </div>
+                                                                <div class="col-sm-9 text-secondary">
+                                                                    <input type="text" class="form-control" id="indirizzo" name="indirizzo" value="@HomeController.utenteLoggato.Indirizzo">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-3">
+                                                                <div class="col-sm-3">
+                                                                    <h6 class="mb-0">Codice Fiscale</h6>
+                                                                </div>
+                                                                <div class="col-sm-9 text-secondary">
+                                                                    <input type="text" class="form-control" id="codicefiscale" name="codice_fiscale" value="@HomeController.utenteLoggato.Codice_Fiscale">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-3">
+                                                                <div class="col-sm-3">
+                                                                    <h6 class="mb-0">Foto Profilo</h6>
+                                                                </div>
+                                                                <div class="col-sm-9 text-secondary">
+                                                                    <input type="text" class="form-control" id="fotoprofilo" name="fotoprofilo" value="@HomeController.utenteLoggato.FotoProfilo">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-3">
+                                                                <div class="col-sm-3">
+                                                                    <h6 class="mb-0">Foto Copertina</h6>
+                                                                </div>
+                                                                <div class="col-sm-9 text-secondary">
+                                                                    <input type="text" class="form-control" id="copertina" name="copertina" value="@HomeController.utenteLoggato.Copertina">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-sm-3"></div>
+                                                                <div class="col-sm-9 text-secondary">
+                                                                    <input type="submit" class="btn btn-primary px-4" value="Modifica">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
 
-	</div><!--theme-layout end-->
+                                            </div>
+
+                                        </div><!--notbar end-->
+
+                                    </div><!--acc-setting end-->
+                                </div>
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div><!--account-tabs-setting end-->
+            </div>
+        </section>
+
+
+    </div><!--theme-layout end-->
 
 
 

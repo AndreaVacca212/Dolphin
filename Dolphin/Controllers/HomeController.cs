@@ -78,7 +78,7 @@ namespace Dolphin.Controllers
 
         public IActionResult UserList()
         {
-            return View(DAOUtente.GetInstance().Read());
+            return View(DAOUtente.GetInstance().Read3(HomeController.utenteLoggato.Id));
         }
 
 
