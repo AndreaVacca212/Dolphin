@@ -248,23 +248,36 @@
                             <div class="col-lg-3">
                                 <div class="right-sidebar">
                                     <div class="message-btn">
+                                        @{ bool ris = false;}
                                         @foreach (var x in DAOAmicizia.GetInstance().ReadDef())
                                         {
-                                            @if (HomeController.utenteLoggato.Id == ((Amicizia)x).IdUtente)
+                                            @if (HomeController.utenteLoggato.Id == ((Amicizia)x).IdUtente || HomeController.utenteLoggato.Id != ((Amicizia)x).IdUtente)
                                             {
-                                                if ((((Utente)Model).Id) == ((Amicizia)x).IdUtente2)
+                                                if (((((Utente)Model).Id) == ((Amicizia)x).IdUtente2 && HomeController.utenteLoggato.Id == ((Amicizia)x).IdUtente) || ((((Utente)Model).Id) == ((Amicizia)x).IdUtente && HomeController.utenteLoggato.Id == ((Amicizia)x).IdUtente2))
                                                 {
-                                                    <a href="" title=""><i class="fa fa-user-minus"></i> Elimina amico</a>
+                                                    //<a href="" title=""><i class="fa fa-user-minus"></i> Elimina amico</a>
+                                                    ris = true;
+                                                        break;
                                                 }
                                                 else
                                                 {
-                                                    <a href="/User/RichiediAmicizia/?idRichiedente=@HomeController.utenteLoggato.Id&idAccettante=@(((Utente)Model).Id)" title=""><i class="fa fa-user-plus"></i> Aggiungi Amico</a>
-
+                                                    ris = false;
                                                 }
 
                                             }
 
                                         }
+                                        @if (ris)
+                                            {
+                                                <a href="" title=""><i class="fa fa-user-minus"></i> Elimina amico</a>
+
+                                            }
+                                            else
+                                            {
+                                                <a href="/User/RichiediAmicizia/?idRichiedente=@HomeController.utenteLoggato.Id&idAccettante=@(((Utente)Model).Id)" title=""><i class="fa fa-user-plus"></i> Aggiungi Amico</a>
+
+                                            }
+
 
                                     </div>
                                     <div class="widget widget-portfolio">

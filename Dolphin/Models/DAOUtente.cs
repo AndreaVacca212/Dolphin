@@ -108,17 +108,17 @@ namespace Dolphin.Models
 
         public bool Delete(int id)
         {
-            return db.Send($"DELETE FROM Utenti WHERE id = {id}");
+            return db.Send($"delete from Commenti where idUtente={id} or idPost is null; delete from MiPiacePosts where idUtente={id}; delete from Amicizie where idUtente={id} or idUtente2={id}; delete from posts where idUtente={id}; delete from utenti where id={id};");
         }
 
         public bool Insert(Utente u)
         {
             return db.Send($"INSERT INTO Utenti " +
-                             $"(nome, cognome, telefono, email, pass, indirizzo, codice_fiscale, fotoProfilo, copertina) " +
+                             $"(nome, cognome, telefono, email, pass, indirizzo, codice_fiscale, fotoProfilo, copertina, ruolo) " +
                              $"VALUES " +
                              $"('{u.Nome}', '{u.Cognome}', " +
                              $"'{u.Telefono}', '{u.Email}',HASHBYTES('SHA2_256','{u.Pass}')," +
-                             $"'{u.Indirizzo}', '{u.Codice_Fiscale}', '{u.FotoProfilo}', '{u.Copertina}')");                                         
+                             $"'{u.Indirizzo}', '{u.Codice_Fiscale}', '{u.FotoProfilo}', '{u.Copertina}','{u.Ruolo}')");                                         
         }
 
         public bool Modifica(Entity e)

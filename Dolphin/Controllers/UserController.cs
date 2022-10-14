@@ -40,14 +40,14 @@ namespace Dolphin.Controllers
             user.FromDictionary(parametri);
 
             if (DAOUtente.GetInstance().Modifica(user))
-                return RedirectToAction("UserAccount","User");
+                return RedirectToAction("UserAccount", "User");
             else
                 return Content("Modifica Fallita");
         }
         public IActionResult EliminaPost(int id)
         {
             if (DAOPost.GetInstance().Delete(id))
-                return RedirectToAction("UserAccount","User");
+                return RedirectToAction("UserAccount", "User");
             else
                 return Content("Eliminazione Fallita");
         }
@@ -102,7 +102,7 @@ namespace Dolphin.Controllers
                 return Content("Ops qualcosa è andato storto");
             }
         }
-       
+
         public IActionResult RifiutaRichiestaAmicizia(int idRichiesta)
         {
             if (DAORichiestaAmicizia.GetInstance().Delete(idRichiesta))
@@ -112,6 +112,18 @@ namespace Dolphin.Controllers
             else
             {
                 return Content("Ops qualcosa è andato storto");
+            }
+        }
+
+        public IActionResult EliminaUtente(int id)
+        {
+            if (DAOUtente.GetInstance().Delete(id))
+            {
+                return RedirectToAction("UserList", "Home");
+            }
+            else
+            {
+                return Content("Ops non sono riuscito a eliminare");
             }
         }
     }

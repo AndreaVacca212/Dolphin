@@ -109,7 +109,7 @@ body {
 	font-family: 'Source Sans Pro', sans-serif;
 	overflow-x: hidden;
 	font-weight: 400;
-	background-color: #f2f2f2;
+	background: /*#f2f2f2*/ radial-gradient(#ffa500, #d3d3cb);
 }
 ol, ul {
 	list-style: none;
