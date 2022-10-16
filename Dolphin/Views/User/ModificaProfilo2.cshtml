@@ -26,15 +26,15 @@
 <body>
     <div class="wrapper">
 
-        <header id="myHeader" style=" position: sticky; ">
+        <header id="myHeader" style=" position: sticky; " class="sticky">
             <div class="container">
                 <div class="header-data">
                     <div class="logo">
                         <a href="index.html" title=""><img src="~/img/Logo Progetto 5.jpg" style="border-radius: 50%;" alt=""></a>
                     </div><!--logo end-->
                     <div class="search-bar">
-                        <form>
-                            <input type="text" name="search" placeholder="Cerca...">
+                        <form name="input" action="/Home/UserListLike/valore" method="get">
+                            <input id="input" type="text" name="valore" placeholder="Cerca su Dolphin">
                             <button type="submit"><i class="la la-search"></i></button>
                         </form>
                     </div><!--search-bar end-->
@@ -63,9 +63,9 @@
 
                                     }
                                 </a>
-                                @foreach (var e in DAORichiestaAmicizia.GetInstance().ReadRichiestaAmicizia(HomeController.utenteLoggato.Id))
-                                {
-                                    <div class="notification-box noti" id="notification">
+                                <div class="notification-box noti" id="notification">
+                                    @foreach (var e in DAORichiestaAmicizia.GetInstance().ReadRichiestaAmicizia(HomeController.utenteLoggato.Id))
+                                    {
                                         <div class="nott-list">
                                             <div class="notfication-details">
                                                 <div class="noty-user-img">
@@ -75,13 +75,13 @@
                                                     <h3><a title="">@(((RichiestaAmicizia)e).Nome) @(((RichiestaAmicizia)e).Cognome) </a>Ti ha inviato una richiesta di amicizia</h3>
                                                 </div>
                                                 <div>
-                                                    <a href="/Home/AccettaRichiestaAmicizia/?idRichiesta=@(((RichiestaAmicizia)e).Id)&idRichiedente=@(((RichiestaAmicizia)e).IdRichiedente)&idAccettante=@(HomeController.utenteLoggato.Id)" title="" class="follow">Accetta</a>
-                                                    <a href="/Home/RifiutaRichiestaAmicizia/?idRichiesta=@(((RichiestaAmicizia)e).Id)" title="" class="danger" style="background-color:red;">Rifiuta</a><!--vedere come cambiare colore in rosso-->
+                                                    <a href="/Home/AccettaRichiestaAmicizia/?idRichiesta=@(((RichiestaAmicizia)e).Id)&idRichiedente=@(((RichiestaAmicizia)e).IdRichiedente)&idAccettante=@(HomeController.utenteLoggato.Id)" title="" class="btn btn-success">Accetta</a>
+                                                    <a href="/Home/RifiutaRichiestaAmicizia/?idRichiesta=@(((RichiestaAmicizia)e).Id)" title="" class="btn btn-danger" style="background-color:red;">Rifiuta</a><!--vedere come cambiare colore in rosso-->
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                }
+                                    }
+                                </div>
                             </li>
                         </ul>
                     </nav><!--nav end-->

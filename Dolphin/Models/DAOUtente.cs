@@ -39,6 +39,22 @@ namespace Dolphin.Models
             return ris;
         }
 
+
+        public List<Entity> ReadLike(string valore)
+        {
+            List<Entity> ris = new List<Entity>();
+            List<Dictionary<string, string>> tabella = db.Read($"SELECT Utenti.id, Utenti.nome, Utenti.cognome, Utenti.fotoProfilo FROM Utenti WHERE Utenti.nome LIKE '%{valore}%' OR Utenti.cognome LIKE '%{valore}%';");
+
+            foreach (Dictionary<string, string> riga in tabella)
+            {
+                Utente user = new Utente();
+                user.FromDictionary(riga);
+
+                ris.Add(user);
+            }
+            return ris;
+        }
+
         public List<Entity> LeggiUtente(int id)
         {
             List<Entity> ris = new List<Entity>();
@@ -65,7 +81,7 @@ namespace Dolphin.Models
             List<Entity> ris = new List<Entity>();
 
             Dictionary<string, string> tabella = db.ReadOne($"SELECT * " +
-                                                            $"FROM UtentiView " +
+                                                            $"FROM utenti " +
                                                             $"WHERE id = {id}");
                                                              
                 Utente a = new Utente();
@@ -108,7 +124,7 @@ namespace Dolphin.Models
 
         public bool Delete(int id)
         {
-            return db.Send($"delete from Commenti where idUtente={id} or idPost is null; delete from MiPiacePosts where idUtente={id}; delete from Amicizie where idUtente={id} or idUtente2={id}; delete from posts where idUtente={id}; delete from utenti where id={id};");
+            return db.Send($"delete from Commenti where idUtente={id} or idPost is null; delete from MiPiacePosts where idUtente={id};delete from RichiesteAmicizia where idRichiedente = {id} or idRicevente = {id}; delete from Amicizie where idUtente={id} or idUtente2={id}; delete from posts where idUtente={id}; delete from utenti where id={id};");
         }
 
         public bool Insert(Utente u)

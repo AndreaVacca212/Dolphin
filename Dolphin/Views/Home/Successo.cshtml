@@ -3,7 +3,9 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="refresh" content="3; url=/Home/Index/" />
     <title>Dolphin</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="icon" href="~/img/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="~/css/site.css" type="text/css" />
     <script src="~/js/site.js"></script>
@@ -16,12 +18,21 @@
             <div id="logo"> <a href="#">Dolphin</a> </div>
             <div id="header-main-right">
                 <div id="header-main-right-nav">
-                    <form method="post" action="/Home/Valida" id="login_form" name="login_form" >
+                    <form method="post" action="/Home/Valida" id="login_form" name="login_form">
                         <table border="0" style="border:none">
                             <tr>
                                 <td><input type="text" tabindex="1" id="email" placeholder="Email" name="email" class="inputtext radius1" value="" /></td>
                                 <td><input type="password" tabindex="2" id="pass2" placeholder="Password" name="pass" class="inputtext radius1" /></td>
                                 <td><input type="submit" class="fbbutton" name="login" value="Login" /></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>
+                                        <input id="persist_box" type="checkbox" name="persistent" value="1" checked="1" />
+                                        <span style="color:#ccc;">Keep me logged in</span>
+                                    </label>
+                                </td>
+                                <td><label><a href="" style="color:#ccc; text-decoration:none">forgot your password?</a></label></td>
                             </tr>
                         </table>
                     </form>
@@ -29,6 +40,10 @@
             </div>
         </div>
     </div>
+    <div class="row"><div class="alert alert-success" role="alert">
+    Registrazione avvenuta con successo! Verrai reindirizzato alla pagina di LogIn
+</div></div>
+    
     <div>
         <div class="logo" style="float:left;">
             <a href="index.html" title=""><img src="~/img/Logo Progetto 5.jpg" style="border-radius: 50%;width: 600px;" alt="" /></a>
@@ -53,7 +68,7 @@
                             <input type="text" id="email" name="email" placeholder="Email" value="" class="radius" required />
                         </p>
                         <p>
-                            <input type="password" id="pass" name="pass" placeholder="Password" class="radius" required/>
+                            <input type="password" id="pass" name="pass" placeholder="Password" class="radius" required />
                         </p>
                         <p>
                             <input type="password" id="confermapass" name="confermapass" placeholder="Conferma Password" class="radius" required />
@@ -65,7 +80,6 @@
                             <input type="text" id="codicefiscale" name="codice_fiscale" placeholder="Codice Fiscale" value="" class="radius" required />
                             <input type="hidden" id="ruolo" name="ruolo" value="user" />
                             <input type="hidden" id="fotoprofilo" name="fotoprofilo" value="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQICtbZwKPynpVYDJGD_1HNgZnzXWqc8PV-I-uk-SlAP5D91nlHZpJ_0Z7bhN018Koy0yA&usqp=CAU" />
-                            <input type="hidden" id="fotocopertina" name="copertina" value="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/db3ccb6c-b21b-415e-8df5-7ef5ea98ba15/davxke5-e2727119-5df5-464b-aabe-b6fdc0ca658b.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RiM2NjYjZjLWIyMWItNDE1ZS04ZGY1LTdlZjVlYTk4YmExNVwvZGF2eGtlNS1lMjcyNzExOS01ZGY1LTQ2NGItYWFiZS1iNmZkYzBjYTY1OGIuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.Xepg1e079sd2zZonI8-PCxX6WGKicFGnNfRxejeEBck" />
                         </p>
                         <p>
                             <button class="radius title" name="signup">Registrati Dolphin</button>

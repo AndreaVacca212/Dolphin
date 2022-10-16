@@ -1561,8 +1561,7 @@ main {
 .posty {
 	float: left;
 	width: 100%;
-	border-left: 1px solid #e4e4e4;
-	border-right: 1px solid #e4e4e4;
+
 }
 .posty .job-status-bar {
 	border-bottom: 1px solid #e4e4e4;
@@ -1731,7 +1730,7 @@ main {
 	float: none;
 }
 .comment_box input {
-	width: 372px;
+	width: 330px;
 	height: 40px;
 	border: 1px solid #e5e5e5;
 	background-color: #efefef;

@@ -26,15 +26,15 @@
 
 <body>
     <div class="wrapper">
-        <header id="myHeader" style=" position: sticky; ">
+        <header id="myHeader" style=" position: sticky; " class="sticky">
             <div class="container">
                 <div class="header-data">
                     <div class="logo">
                         <a href="index.html" title=""><img src="~/img/Logo Progetto 5.jpg" style="border-radius: 50%;" alt=""></a>
                     </div><!--logo end-->
                     <div class="search-bar">
-                        <form>
-                            <input type="text" name="search" placeholder="Cerca...">
+                        <form name="input" action="/Home/UserListLike/valore" method="get">
+                            <input id="input" type="text" name="valore" placeholder="Cerca su Dolphin">
                             <button type="submit"><i class="la la-search"></i></button>
                         </form>
                     </div><!--search-bar end-->
@@ -63,9 +63,9 @@
 
                                     }
                                 </a>
-                                @foreach (var e in DAORichiestaAmicizia.GetInstance().ReadRichiestaAmicizia(HomeController.utenteLoggato.Id))
-                                {
-                                    <div class="notification-box noti" id="notification">
+                                <div class="notification-box noti" id="notification">
+                                    @foreach (var e in DAORichiestaAmicizia.GetInstance().ReadRichiestaAmicizia(HomeController.utenteLoggato.Id))
+                                    {
                                         <div class="nott-list">
                                             <div class="notfication-details">
                                                 <div class="noty-user-img">
@@ -75,13 +75,13 @@
                                                     <h3><a title="">@(((RichiestaAmicizia)e).Nome) @(((RichiestaAmicizia)e).Cognome) </a>Ti ha inviato una richiesta di amicizia</h3>
                                                 </div>
                                                 <div>
-                                                    <a href="/Home/AccettaRichiestaAmicizia/?idRichiesta=@(((RichiestaAmicizia)e).Id)&idRichiedente=@(((RichiestaAmicizia)e).IdRichiedente)&idAccettante=@(HomeController.utenteLoggato.Id)" title="" class="follow">Accetta</a>
-                                                    <a href="/Home/RifiutaRichiestaAmicizia/?idRichiesta=@(((RichiestaAmicizia)e).Id)" title="" class="danger" style="background-color:red;">Rifiuta</a><!--vedere come cambiare colore in rosso-->
+                                                    <a href="/Home/AccettaRichiestaAmicizia/?idRichiesta=@(((RichiestaAmicizia)e).Id)&idRichiedente=@(((RichiestaAmicizia)e).IdRichiedente)&idAccettante=@(HomeController.utenteLoggato.Id)" title="" class="btn btn-success">Accetta</a>
+                                                    <a href="/Home/RifiutaRichiestaAmicizia/?idRichiesta=@(((RichiestaAmicizia)e).Id)" title="" class="btn btn-danger" style="background-color:red;">Rifiuta</a><!--vedere come cambiare colore in rosso-->
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                }
+                                    }
+                                </div>
                             </li>
                         </ul>
                     </nav><!--nav end-->
@@ -135,7 +135,8 @@
                                             </ul>
                                         </div><!--user_pro_status end-->
                                         <ul class="social_links">
-                                            <li><a href="#" title=""><i class="la la-globe"></i> @HomeController.utenteLoggato.Email</a></li>
+                                            <li><a href="#" title=""><i class="la la-globe"></i> @(((Utente)Model).Email)</a></li>
+                                            <li><a href="#"><i class="fas fa-phone"></i> @(((Utente)Model).Telefono)</a></li>
                                         </ul>
                                     </div><!--user_profile end-->
 
@@ -162,12 +163,15 @@
                                                                     <span><img src="~/img/clock.png" alt="">@(((Post)p).Data_Ora)</span>
                                                                 </div>
                                                             </div>
-                                                            <div class="ed-opts">
-                                                                <a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
-                                                                <ul class="ed-options">
-                                                                    <li><a href="#" title="">Modifica Post</a></li>
-                                                                </ul>
-                                                            </div>
+                                                            @if (HomeController.utenteLoggato.Ruolo == "admin")
+                                                            {
+                                                                <div class="ed-opts">
+                                                                    <a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
+                                                                    <ul class="ed-options">
+                                                                        <li><a href="/Home/EliminaPost/@(((Post)p).Id)" onsubmit="return confirm('Sei sicuro di voler eliminare il post?');" title="">Elimina Post</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            }
                                                         </div>
                                                         <div class="job_descp">
                                                             <p>@(((Post)p).ContenutoPost)</p>
@@ -175,7 +179,7 @@
                                                         <div class="job-status-bar">
                                                             <ul class="like-com">
                                                                 <li>
-                                                                    <a href="#"><i class="fas fa-heart"></i> Mi piace @(((Post)p).MiPiacePosts.Count) </a>
+                                                                    <a href="/Home/NuovoLike/@(((Post)p).Id)"><i class="fas fa-heart"></i> Mi piace @(((Post)p).MiPiacePosts.Count) </a>
 
                                                                 </li>
                                                                 <li><a href="#"><i class="fas fa-comment-alt"></i> Commenti @(DAOCommento.GetInstance().ReadCommenti((((Post)p).Id)).Count)</a></li>
@@ -249,6 +253,7 @@
                                 <div class="right-sidebar">
                                     <div class="message-btn">
                                         @{ bool ris = false;}
+                                        @{ bool ris2 = false;}
                                         @foreach (var x in DAOAmicizia.GetInstance().ReadDef())
                                         {
                                             @if (HomeController.utenteLoggato.Id == ((Amicizia)x).IdUtente || HomeController.utenteLoggato.Id != ((Amicizia)x).IdUtente)
@@ -257,7 +262,7 @@
                                                 {
                                                     //<a href="" title=""><i class="fa fa-user-minus"></i> Elimina amico</a>
                                                     ris = true;
-                                                        break;
+                                                    break;
                                                 }
                                                 else
                                                 {
@@ -267,16 +272,33 @@
                                             }
 
                                         }
-                                        @if (ris)
+
+                                        @foreach (var z in DAORichiestaAmicizia.GetInstance().Read())
+                                        {
+                                            if (HomeController.utenteLoggato.Id == (((RichiestaAmicizia)z).IdRichiedente) && (((Utente)Model).Id) == (((RichiestaAmicizia)z).IdRicevente))
                                             {
-                                                <a href="" title=""><i class="fa fa-user-minus"></i> Elimina amico</a>
+                                                ris2 = true;
+                                            }
+                                        }
+                                        @if (ris)
+                                        {
+                                            <a href="" title=""><i class="fa fa-user-minus"></i> Elimina amico</a>
+
+                                        }
+                                        else
+                                        {
+                                            if (ris2)
+                                            {
+                                                <a href="#" title=""><i class="fa fa-user-plus"></i> Richiesta Inviata</a>
 
                                             }
                                             else
                                             {
-                                                <a href="/User/RichiediAmicizia/?idRichiedente=@HomeController.utenteLoggato.Id&idAccettante=@(((Utente)Model).Id)" title=""><i class="fa fa-user-plus"></i> Aggiungi Amico</a>
+                                                <a href="/User/RichiediAmicizia/?idRichiedente=@(HomeController.utenteLoggato.Id)&idAccettante=@(((Utente)Model).Id)" title=""><i class="fa fa-user-plus"></i> Aggiungi Amico</a>
 
                                             }
+
+                                        }
 
 
                                     </div>
@@ -327,11 +349,11 @@
                     <li><a href="#" title="">Language</a></li>
                     <li><a href="#" title="">Copyright Policy</a></li>
                 </ul>
-                <p><img src="~/img/copy-icon2.png" alt="">Copyright 2019</p>
-                <img class="fl-rgt" src="~/img/logo2.png" alt="">
+                <p><img src="~/img/copy-icon2.png" alt="">Copyright 2022</p>
+                <img src="~/img/Logo Progetto 5.jpg" style="width:77px; heigth:100px;" alt="">
             </div>
         </div>
-    </footer><!--footer end-->
+    </footer>
 
 
     <div class="overview-box" id="create-portfolio">

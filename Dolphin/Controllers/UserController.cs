@@ -63,6 +63,29 @@ namespace Dolphin.Controllers
                 return Content("Inserimento fallito");
         }
 
+        public IActionResult EliminaLike(int id)
+        {
+            if (DAOBacheca.GetInstance().DeleteLikes(id))
+            {
+                return RedirectToAction("UserAccount", "User");
+            }
+            else
+                return Content("Elimina like fallito");
+        }
+
+        public IActionResult NuovoLike(int id)
+        {
+            if (DAOBacheca.GetInstance().InsertLikes(id))
+            {
+                return RedirectToAction("UserAccount", "User");
+            }
+            else
+                return Content("Like fallito");
+        }
+
+
+
+
         public IActionResult InserisciCommento(Dictionary<string, string> parametri)
         {
             Commento c = new Commento();
@@ -77,7 +100,7 @@ namespace Dolphin.Controllers
         public IActionResult RichiediAmicizia(int idRichiedente, int idAccettante)
         {
             if (DAORichiestaAmicizia.GetInstance().Insert(idRichiedente, idAccettante))
-                return RedirectToAction("UserAccount", "User");
+                return RedirectToAction("Bacheca", "Home");
             else
                 return Content("Richiesta fallita");
         }

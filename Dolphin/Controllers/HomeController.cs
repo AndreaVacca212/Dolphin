@@ -46,6 +46,30 @@ namespace Dolphin.Controllers
         }
 
 
+        public IActionResult EliminaLike(int id)
+        {
+            if (DAOBacheca.GetInstance().DeleteLikes(id))
+            {
+                return RedirectToAction("Bacheca", "Home");
+            }
+            else
+                return Content("Elimina like fallito");
+        }
+        public IActionResult Successo()
+        {
+            return View();
+        }
+        public IActionResult EliminaPost(int id)
+        {
+            if (DAOBacheca.GetInstance().DeletePost(id))
+            {
+                return RedirectToAction("Bacheca", "Home");
+            }
+            else
+                return Content("Elimina like fallito");
+        }
+
+
         public IActionResult NuovoLike(int id)
         {
             if (DAOBacheca.GetInstance().InsertLikes(id))
@@ -115,6 +139,22 @@ namespace Dolphin.Controllers
             }
         }
 
+
+        public IActionResult InserisciPost(Dictionary<string, string> parametri)
+        {
+            Post post = new Post();
+            post.FromDictionary(parametri);
+
+            if (DAOPost.GetInstance().Insert(post))
+                return RedirectToAction("Bacheca", "Home");
+            else
+                return Content("Inserimento fallito");
+        }
+
+        public IActionResult UserListLike(string valore)
+        {
+            return View(DAOUtente.GetInstance().ReadLike(valore));
+        }
 
 
         // GET: /<controller>/

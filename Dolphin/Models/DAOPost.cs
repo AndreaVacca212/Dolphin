@@ -86,7 +86,7 @@ namespace Dolphin.Models
 
             foreach (Dictionary<string, string> riga in tabella)
             {
-                Post a = new Post();
+                MiPiacePost a = new MiPiacePost();
                 a.FromDictionary(riga);
 
                 ris.Add(a);

@@ -26,7 +26,7 @@
 
 <body>
     <div class="wrapper">
-        <header id="myHeader" style=" position: sticky; ">
+        <header id="myHeader" style=" position: sticky; " class="sticky">
             <div class="container">
                 <div class="header-data">
                     <div class="logo">
@@ -63,9 +63,9 @@
 
                                     }
                                 </a>
-                                @foreach (var e in DAORichiestaAmicizia.GetInstance().ReadRichiestaAmicizia(HomeController.utenteLoggato.Id))
-                                {
-                                    <div class="notification-box noti" id="notification">
+                                <div class="notification-box noti" id="notification">
+                                    @foreach (var e in DAORichiestaAmicizia.GetInstance().ReadRichiestaAmicizia(HomeController.utenteLoggato.Id))
+                                    {
                                         <div class="nott-list">
                                             <div class="notfication-details">
                                                 <div class="noty-user-img">
@@ -75,13 +75,13 @@
                                                     <h3><a title="">@(((RichiestaAmicizia)e).Nome) @(((RichiestaAmicizia)e).Cognome) </a>Ti ha inviato una richiesta di amicizia</h3>
                                                 </div>
                                                 <div>
-                                                    <a href="/Home/AccettaRichiestaAmicizia/?idRichiesta=@(((RichiestaAmicizia)e).Id)&idRichiedente=@(((RichiestaAmicizia)e).IdRichiedente)&idAccettante=@(HomeController.utenteLoggato.Id)" title="" class="follow">Accetta</a>
-                                                    <a href="/Home/RifiutaRichiestaAmicizia/?idRichiesta=@(((RichiestaAmicizia)e).Id)" title="" class="danger" style="background-color:red;">Rifiuta</a><!--vedere come cambiare colore in rosso-->
+                                                    <a href="/Home/AccettaRichiestaAmicizia/?idRichiesta=@(((RichiestaAmicizia)e).Id)&idRichiedente=@(((RichiestaAmicizia)e).IdRichiedente)&idAccettante=@(HomeController.utenteLoggato.Id)" title="" class="btn btn-success">Accetta</a>
+                                                    <a href="/Home/RifiutaRichiestaAmicizia/?idRichiesta=@(((RichiestaAmicizia)e).Id)" title="" class="btn btn-danger" style="background-color:red;">Rifiuta</a><!--vedere come cambiare colore in rosso-->
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                }
+                                    }
+                                </div>
                             </li>
                         </ul>
                     </nav><!--nav end-->
@@ -168,26 +168,57 @@
                                                             <div class="usy-dt">
                                                                 <img src="@HomeController.utenteLoggato.FotoProfilo" style="height:50px; width:50px;" alt="">
                                                                 <div class="usy-name">
-                                                                    <h3>@HomeController.utenteLoggato.Nome</h3>
+                                                                    <h3>@HomeController.utenteLoggato.Nome @HomeController.utenteLoggato.Cognome</h3>
                                                                     <span><img src="~/img/clock.png" alt="">@(((Post)p).Data_Ora)</span>
                                                                 </div>
                                                             </div>
-                                                            <div class="ed-opts">
-                                                                <a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
-                                                                <ul class="ed-options">
-                                                                    <li><a href="#" title="">Modifica Post</a></li>
-                                                                </ul>
-                                                            </div>
+                                                            @if (HomeController.utenteLoggato.Ruolo == "admin")
+                                                            {
+                                                                <div class="ed-opts">
+                                                                    <a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
+                                                                    <ul class="ed-options">
+                                                                        <li><a href="/Home/EliminaPost/@(((Post)p).Id)" onclick="return confirm('Sei sicuro di voler eliminare il post?');" title="">Elimina Post</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            }
                                                         </div>
                                                         <div class="job_descp">
                                                             <p>@(((Post)p).ContenutoPost)</p>
                                                         </div>
                                                         <div class="job-status-bar">
                                                             <ul class="like-com">
-                                                                <li>
-                                                                    <a href="#"><i class="fas fa-heart"></i> Mi piace @(((Post)p).MiPiacePosts.Count) </a>
+                                                                @{ bool ris = false;}
+                                                                @foreach (var m in DAOPost.GetInstance().ReadLikes(((Post)p).Id))
+                                                                {
+                                                                    if ((((MiPiacePost)m).IdUtente) == HomeController.utenteLoggato.Id)
+                                                                    {
+                                                                        ris = true;
+                                                                        break;
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        ris = false;
+                                                                    }
 
-                                                                </li>
+
+
+                                                                }
+
+                                                                @if (ris == true)
+                                                                {
+                                                                    <li>
+                                                                        <a href="/User/EliminaLike/@(((Post)p).Id)"><i class="fas fa-heart"></i> Ti piace @(((Post)p).MiPiacePosts.Count) </a>
+
+                                                                    </li>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <li>
+                                                                        <a href="/User/NuovoLike/@(((Post)p).Id)"><i class="fas fa-heart"></i> Mi piace @(((Post)p).MiPiacePosts.Count) </a>
+
+                                                                    </li>
+                                                                }
+                                                                
                                                                 <li><a href="#"><i class="fas fa-comment-alt"></i> Commenti @(DAOCommento.GetInstance().ReadCommenti((((Post)p).Id)).Count)</a></li>
                                                             </ul>
                                                         </div>
@@ -310,11 +341,11 @@
                     <li><a href="#" title="">Language</a></li>
                     <li><a href="#" title="">Copyright Policy</a></li>
                 </ul>
-                <p><img src="~/img/copy-icon2.png" alt="">Copyright 2019</p>
-                <img class="fl-rgt" src="~/img/logo2.png" alt="">
+                <p><img src="~/img/copy-icon2.png" alt="">Copyright 2022</p>
+                <img src="~/img/Logo Progetto 5.jpg" style="width:77px; heigth:100px;" alt="">
             </div>
         </div>
-    </footer><!--footer end-->
+    </footer>
 
 
     <div class="overview-box" id="create-portfolio">
