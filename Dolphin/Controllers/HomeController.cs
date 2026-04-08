@@ -5,7 +5,6 @@ using System.Reflection.Metadata;
 using System.Threading.Tasks;
 using Dolphin.Models;
 using Microsoft.AspNetCore.Mvc;
-using Utility;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -15,7 +14,7 @@ namespace Dolphin.Controllers
     {
         private ILogger<HomeController> il;
 
-        public static Utente utenteLoggato = null;
+        public static User loggedUser = null;
 
         private static int chiamata = -1;
 
@@ -32,7 +31,7 @@ namespace Dolphin.Controllers
                 // se arrivo qui significa che l'utente esiste
                 il.LogInformation($"UTENTE LOGGATO: {parametri["email"]}");
 
-                utenteLoggato = DAOUtente.GetInstance().Cerca(parametri["email"]);
+                loggedUser = DAOUtente.GetInstance().Cerca(parametri["email"]);
 
                 return RedirectToAction("Bacheca", "Home");
             }
@@ -42,7 +41,7 @@ namespace Dolphin.Controllers
 
         public IActionResult Bacheca()
         {
-            return View(DAOBacheca.GetInstance().Read(utenteLoggato.Id));
+            return View(DAOBacheca.GetInstance().Read(loggedUser.Id));
         }
 
 
@@ -81,7 +80,7 @@ namespace Dolphin.Controllers
         }
         public IActionResult Salva(Dictionary<string, string> parametri)
         {
-            Utente u = new Utente();
+            User u = new();
 
             u.FromDictionary(parametri);
 
@@ -94,15 +93,15 @@ namespace Dolphin.Controllers
         public IActionResult Logout()
         {
             chiamata = -1;
-            il.LogInformation($"LOGOUT: {utenteLoggato.Nome}");
-            utenteLoggato = null;
+            il.LogInformation($"LOGOUT: {loggedUser.Name}");
+            loggedUser = null;
 
             return RedirectToAction("Index", "Home");
         }
 
         public IActionResult UserList()
         {
-            return View(DAOUtente.GetInstance().Read3(HomeController.utenteLoggato.Id));
+            return View(DAOUtente.GetInstance().Read3(HomeController.loggedUser.Id));
         }
 
 

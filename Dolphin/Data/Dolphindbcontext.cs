@@ -7,12 +7,12 @@ namespace Dolphin.Data
     {
         public DolphinDbContext(DbContextOptions<DolphinDbContext> options) : base(options) { }
 
-        public DbSet<User> Utenti { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbSet<Post> Posts { get; set; }
-        public DbSet<Comment> Commenti { get; set; }
-        public DbSet<LikePost> MiPiacePosts { get; set; }
-        public DbSet<Friendship> Amicizie { get; set; }
-        public DbSet<FriendRequest> RichiesteAmicizia { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<LikePost> PostsLikes { get; set; }
+        public DbSet<Friendship> Friendships { get; set; }
+        public DbSet<FriendRequest> FriendRequests { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

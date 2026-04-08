@@ -16,7 +16,7 @@ namespace Dolphin.Controllers
         // GET: /<controller>/
         public IActionResult UserAccount()
         {
-            return View(DAOUtente.GetInstance().Read2(HomeController.utenteLoggato.Id)[0]);
+            return View(DAOUtente.GetInstance().Read2(HomeController.loggedUser.Id)[0]);
         }
 
         public IActionResult ViewProfile(int id)
@@ -36,7 +36,7 @@ namespace Dolphin.Controllers
 
         public IActionResult ModificaUtente(Dictionary<string, string> parametri)
         {
-            Utente user = new Utente();
+            User user = new User();
             user.FromDictionary(parametri);
 
             if (DAOUtente.GetInstance().Modifica(user))
@@ -88,7 +88,7 @@ namespace Dolphin.Controllers
 
         public IActionResult InserisciCommento(Dictionary<string, string> parametri)
         {
-            Commento c = new Commento();
+            Comment c = new Comment();
             c.FromDictionary(parametri);
 
             if (DAOCommento.GetInstance().Insert(c))
