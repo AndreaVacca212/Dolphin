@@ -97,7 +97,7 @@ namespace Dolphin.Controllers
             il.LogInformation($"LOGOUT: {utenteLoggato.Nome}");
             utenteLoggato = null;
 
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
 
         public IActionResult UserList()
@@ -116,7 +116,8 @@ namespace Dolphin.Controllers
                 {
                     return RedirectToAction("Bacheca", "Home");
 
-                } else
+                }
+                else
                 {
                     return Content("Ops qualcosa è andato storto 1");
                 }
